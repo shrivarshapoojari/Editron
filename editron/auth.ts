@@ -3,7 +3,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter"
 
 import authConfig from "./auth.config"
 import { db } from "./lib/db";
-import { getAccountByUserId, getUserById } from "./modules/auth/actions";
+import { getAccountByUserId, getUserById } from  "@/modules/auth/actions"
 
 
  
@@ -105,9 +105,9 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       session.user.id = token.sub
     } 
 
-    if(token.sub && session.user){
-      session.user.role = token.role
-    }
+    // if(token.sub && session.user){
+    //   session.user.role = token.role
+    // }
 
     return session;
     },
