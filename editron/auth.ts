@@ -105,9 +105,9 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       session.user.id = token.sub
     } 
 
-    // if(token.sub && session.user){
-    //   session.user.role = token.role
-    // }
+    if(token.sub && session.user){
+      session.user.role = token.role
+    }
 
     return session;
     },
