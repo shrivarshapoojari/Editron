@@ -12,7 +12,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import { LogOut, User } from "lucide-react";
 import LogoutButton from "./logout-button";
-import { useCurrentUser } from "../hooks/use-current-user";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 const UserButton = () => {
 
