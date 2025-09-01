@@ -26,7 +26,7 @@ export const protectedRoutes: string[] = [
  */
 
 export const authRoutes: string[] = [
-    "/sign-in",   // Updated to match actual route
+    "/auth/sign-in",   // Updated to match actual route
    
 ]
 
