@@ -345,8 +345,12 @@ export const PlaygroundEditor = ({
     })
 
     // CRITICAL: Override Tab key with high priority and prevent default Monaco behavior
-    if (tabCommandRef.current) {
-      tabCommandRef.current.dispose()
+    if (tabCommandRef.current && typeof tabCommandRef.current.dispose === 'function') {
+      try {
+        tabCommandRef.current.dispose()
+      } catch (error) {
+        console.warn('Error disposing tab command:', error)
+      }
     }
 
     tabCommandRef.current = editor.addCommand(
@@ -508,13 +512,21 @@ export const PlaygroundEditor = ({
       if (suggestionTimeoutRef.current) {
         clearTimeout(suggestionTimeoutRef.current)
       }
-      if (inlineCompletionProviderRef.current) {
-        inlineCompletionProviderRef.current.dispose()
-        inlineCompletionProviderRef.current = null
+      if (inlineCompletionProviderRef.current && typeof inlineCompletionProviderRef.current.dispose === 'function') {
+        try {
+          inlineCompletionProviderRef.current.dispose()
+          inlineCompletionProviderRef.current = null
+        } catch (error) {
+          console.warn('Error disposing inline completion provider:', error)
+        }
       }
-      if (tabCommandRef.current) {
-        tabCommandRef.current.dispose()
-        tabCommandRef.current = null
+      if (tabCommandRef.current && typeof tabCommandRef.current.dispose === 'function') {
+        try {
+          tabCommandRef.current.dispose()
+          tabCommandRef.current = null
+        } catch (error) {
+          console.warn('Error disposing tab command:', error)
+        }
       }
     }
   }, [])
