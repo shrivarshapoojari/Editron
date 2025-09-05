@@ -23,6 +23,7 @@ import {
   ChevronRight,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { toast } from "sonner"
 
 // Define the interface for a single playground item, icon is now a string
 interface PlaygroundData {
@@ -239,15 +240,18 @@ export function DashboardSidebar({ initialPlaygroundData }: { initialPlaygroundD
 
       {/* Footer */}
       <div className="relative z-10 p-6 border-t border-gray-800/50">
-        <Link 
-          href="/settings"
-          className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-800/40 text-gray-400 hover:text-white transition-all duration-300 group"
+        <button 
+          onClick={() => toast.info("Personalisation Coming Soon!", {
+            description: "We're working on amazing customization features for your dashboard. Stay tuned!",
+            duration: 4000,
+          })}
+          className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-800/40 text-gray-400 hover:text-white transition-all duration-300 group w-full text-left"
         >
           <div className="w-8 h-8 rounded-lg bg-gray-800/50 group-hover:bg-gray-700/50 flex items-center justify-center transition-colors">
             <Settings className="w-4 h-4" />
           </div>
           <span className="font-medium">Settings</span>
-        </Link>
+        </button>
       </div>
     </div>
   )
