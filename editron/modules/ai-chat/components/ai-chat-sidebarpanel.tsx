@@ -2,6 +2,7 @@
 
 import type React from "react";
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -126,6 +127,50 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
     const [model, setModel] = useState<string>("gpt-6");
 
     const messagesEndRef = useRef<HTMLDivElement>(null);
+
+    // Prevent body scroll when panel is open
+    useEffect(() => {
+        if (isOpen) {
+            const originalOverflow = document.body.style.overflow;
+            const originalDocumentOverflow = document.documentElement.style.overflow;
+            
+            document.body.style.overflow = 'hidden';
+            document.documentElement.style.overflow = 'hidden';
+
+            // Add global styles to ensure AI panel is above everything
+            const style = document.createElement('style');
+            style.id = 'ai-panel-zindex';
+            style.textContent = `
+                /* AI Panel - Portal rendered at document.body level */
+                .ai-chat-panel {
+                    z-index: 999999 !important;
+                    position: fixed !important;
+                    top: 0 !important;
+                    right: 0 !important;
+                    pointer-events: auto !important;
+                }
+                .ai-chat-backdrop {
+                    z-index: 999998 !important;
+                    position: fixed !important;
+                    top: 0 !important;
+                    left: 0 !important;
+                    width: 100vw !important;
+                    height: 100vh !important;
+                    pointer-events: auto !important;
+                }
+            `;
+            document.head.appendChild(style);
+            
+            return () => {
+                document.body.style.overflow = originalOverflow;
+                document.documentElement.style.overflow = originalDocumentOverflow;
+                const existingStyle = document.getElementById('ai-panel-zindex');
+                if (existingStyle) {
+                    document.head.removeChild(existingStyle);
+                }
+            };
+        }
+    }, [isOpen]);
 
     const scrollToBottom = () => {
         if (messagesEndRef.current) {
@@ -272,22 +317,33 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
 
     return (
         <TooltipProvider>
-            {isOpen && (
+            {isOpen && typeof window !== 'undefined' && createPortal(
                 <>
                     {/* Backdrop */}
                     <div
-                        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-300 opacity-100"
-                        style={{ height: '100vh', width: '100vw' }}
+                        className="ai-chat-backdrop fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 opacity-100"
+                        style={{ 
+                            height: '100vh', 
+                            width: '100vw',
+                            zIndex: 999998,
+                            position: 'fixed',
+                            top: 0,
+                            left: 0
+                        }}
                         onClick={onClose}
                     />
 
                     {/* Side Panel */}
                     <div
-                        className="fixed right-0 top-0 w-full max-w-2xl bg-gradient-to-b from-gray-950 to-gray-900 border-l border-cyan-500/20 z-50 flex flex-col transition-transform duration-300 ease-out shadow-2xl shadow-cyan-500/10 translate-x-0"
+                        className="ai-chat-panel fixed right-0 top-0 w-full max-w-2xl bg-gradient-to-b from-gray-950 to-gray-900 border-l border-cyan-500/20 flex flex-col transition-transform duration-300 ease-out shadow-2xl shadow-cyan-500/10 translate-x-0"
                         style={{ 
                             height: '100vh', 
                             minHeight: '100vh',
-                            maxHeight: '100vh'
+                            maxHeight: '100vh',
+                            zIndex: 999999,
+                            position: 'fixed',
+                            top: 0,
+                            right: 0
                         }}
                     >
                     {/* Enhanced Header */}
@@ -646,7 +702,8 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
                         </div>
                     </form>
                 </div>
-                </>
+                </>,
+                document.body
             )}
         </TooltipProvider>
     );
