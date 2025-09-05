@@ -277,25 +277,31 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
                     {/* Backdrop */}
                     <div
                         className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-300 opacity-100"
+                        style={{ height: '100vh', width: '100vw' }}
                         onClick={onClose}
                     />
 
                     {/* Side Panel */}
                     <div
-                        className="fixed right-0 top-0 h-full w-full max-w-2xl bg-zinc-950 border-l border-zinc-800 z-50 flex flex-col transition-transform duration-300 ease-out shadow-2xl translate-x-0"
+                        className="fixed right-0 top-0 w-full max-w-2xl bg-gradient-to-b from-gray-950 to-gray-900 border-l border-cyan-500/20 z-50 flex flex-col transition-transform duration-300 ease-out shadow-2xl shadow-cyan-500/10 translate-x-0"
+                        style={{ 
+                            height: '100vh', 
+                            minHeight: '100vh',
+                            maxHeight: '100vh'
+                        }}
                     >
                     {/* Enhanced Header */}
-                    <div className="shrink-0 border-b border-zinc-800 bg-zinc-900/80 backdrop-blur-sm">
+                    <div className="shrink-0 border-b border-cyan-500/20 bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-sm">
                         <div className="flex items-center justify-between p-6">
                             <div className="flex items-center gap-3">
                                 <div className="relative w-10 h-10 border rounded-full flex flex-col justify-center items-center">
                                     <Image src={"/logo.svg"} alt="Logo" width={28} height={28} />
                                 </div>
                                 <div>
-                                    <h2 className="text-lg font-semibold text-zinc-100">
+                                    <h2 className="text-lg font-semibold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
                                         Enhanced AI Assistant
                                     </h2>
-                                    <p className="text-sm text-zinc-400">
+                                    <p className="text-sm text-gray-400">
                                         {messages.length} messages
                                     </p>
                                 </div>
@@ -339,7 +345,7 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
                                     variant="ghost"
                                     size="sm"
                                     onClick={onClose}
-                                    className="h-8 w-8 p-0 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800"
+                                    className="h-8 w-8 p-0 text-gray-400 hover:text-cyan-300 hover:bg-cyan-500/10 border border-transparent hover:border-cyan-500/30 transition-all rounded-lg"
                                 >
                                     <X className="h-4 w-4" />
                                 </Button>
@@ -353,25 +359,25 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
                             className="px-6"
                         >
                             <div className="flex items-center justify-between mb-4">
-                                <TabsList className="grid w-full grid-cols-4 max-w-md">
-                                    <TabsTrigger value="chat" className="flex items-center gap-1">
+                                <TabsList className="grid w-full grid-cols-4 max-w-md bg-gray-800/50 border border-cyan-500/20">
+                                    <TabsTrigger value="chat" className="flex items-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-600 data-[state=active]:to-blue-600 data-[state=active]:text-white text-gray-400 hover:text-cyan-300">
                                         <MessageSquare className="h-3 w-3" />
                                         Chat
                                     </TabsTrigger>
                                     <TabsTrigger
                                         value="review"
-                                        className="flex items-center gap-1"
+                                        className="flex items-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-600 data-[state=active]:to-blue-600 data-[state=active]:text-white text-gray-400 hover:text-cyan-300"
                                     >
                                         <Code className="h-3 w-3" />
                                         Review
                                     </TabsTrigger>
-                                    <TabsTrigger value="fix" className="flex items-center gap-1">
+                                    <TabsTrigger value="fix" className="flex items-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-600 data-[state=active]:to-blue-600 data-[state=active]:text-white text-gray-400 hover:text-cyan-300">
                                         <RefreshCw className="h-3 w-3" />
                                         Fix
                                     </TabsTrigger>
                                     <TabsTrigger
                                         value="optimize"
-                                        className="flex items-center gap-1"
+                                        className="flex items-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-600 data-[state=active]:to-blue-600 data-[state=active]:text-white text-gray-400 hover:text-cyan-300"
                                     >
                                         <Zap className="h-3 w-3" />
                                         Optimize
@@ -437,17 +443,17 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
                     </div>
 
                     {/* Messages Container */}
-                    <div className="flex-1 overflow-y-auto bg-zinc-950">
-                        <div className="p-6 space-y-6">
+                    <div className="flex-1 overflow-hidden bg-gradient-to-b from-gray-950/50 to-gray-900/50 min-h-0">
+                        <div className="h-full overflow-y-auto p-6 space-y-6 scrollbar-thin scrollbar-thumb-cyan-500/20 scrollbar-track-transparent">
                             {filteredMessages.length === 0 && !isLoading && (
-                                <div className="text-center text-zinc-500 py-16">
-                                    <div className="relative w-16 h-16 border rounded-full flex flex-col justify-center items-center mx-auto mb-4">
-                                        <Brain className="h-8 w-8 text-zinc-400" />
+                                <div className="text-center text-gray-400 py-16">
+                                    <div className="relative w-16 h-16 border border-cyan-500/30 rounded-full flex flex-col justify-center items-center mx-auto mb-4 bg-gradient-to-r from-cyan-500/10 to-blue-500/10">
+                                        <Brain className="h-8 w-8 text-cyan-400" />
                                     </div>
-                                    <h3 className="text-xl font-semibold mb-3 text-zinc-300">
+                                    <h3 className="text-xl font-semibold mb-3 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
                                         Enhanced AI Assistant
                                     </h3>
-                                    <p className="text-zinc-400 max-w-md mx-auto leading-relaxed mb-6">
+                                    <p className="text-gray-400 max-w-md mx-auto leading-relaxed mb-6">
                                         Advanced AI coding assistant with comprehensive analysis
                                         capabilities.
                                     </p>
@@ -463,7 +469,7 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
                                             <button
                                                 key={suggestion}
                                                 onClick={() => setInput(suggestion)}
-                                                className="px-3 py-2 bg-zinc-800 hover:bg-zinc-700 rounded-lg text-sm text-zinc-300 transition-colors text-left"
+                                                className="px-3 py-2 bg-gray-800/50 hover:bg-cyan-500/10 border border-gray-600/50 hover:border-cyan-500/30 rounded-lg text-sm text-gray-300 hover:text-cyan-300 transition-all text-left"
                                             >
                                                 {suggestion}
                                             </button>
@@ -595,7 +601,7 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
                     {/* Enhanced Input Form */}
                     <form
                         onSubmit={handleSendMessage}
-                        className="shrink-0 p-4 border-t border-zinc-800 bg-zinc-900/80 backdrop-blur-sm"
+                        className="shrink-0 p-4 border-t border-cyan-500/20 bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-sm"
                     >
                         <div className="flex items-end gap-3">
                             <div className="flex-1 relative">
@@ -617,11 +623,11 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
                                         }
                                     }}
                                     disabled={isLoading}
-                                    className="min-h-[44px] max-h-32 bg-zinc-800/50 border-zinc-700/50 text-zinc-100 placeholder-zinc-500 focus:border-blue-500 focus:ring-blue-500/20 resize-none pr-20"
+                                    className="min-h-[44px] max-h-32 bg-gray-800/50 border-gray-600/50 text-gray-100 placeholder-gray-400 focus:border-cyan-500 focus:ring-cyan-500/20 hover:border-cyan-500/30 transition-all resize-none pr-20"
                                     rows={1}
                                 />
                                 <div className="absolute right-3 bottom-3 flex items-center gap-2">
-                                    <kbd className="hidden sm:inline-block px-1.5 py-0.5 text-xs text-zinc-500 bg-zinc-800 border border-zinc-700 rounded">
+                                    <kbd className="hidden sm:inline-block px-1.5 py-0.5 text-xs text-gray-400 bg-gray-800/50 border border-gray-600/50 rounded">
                                         ⌘↵
                                     </kbd>
                                 </div>
@@ -629,7 +635,7 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
                             <Button
                                 type="submit"
                                 disabled={isLoading || !input.trim()}
-                                className="h-11 px-4 bg-blue-600 hover:bg-blue-700 text-white border-0 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                className="h-11 px-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white border-0 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-cyan-500/20"
                             >
                                 {isLoading ? (
                                     <Loader2 className="h-4 w-4 animate-spin" />
