@@ -1,39 +1,40 @@
 
 import { Button } from "@/components/ui/button"
-import { ArrowDown } from "lucide-react"
-import Image from "next/image"
+import { Github, GitBranch } from "lucide-react"
 
 const AddRepo = () => {
   return (
     <div
-      className="group px-6 py-6 flex flex-row justify-between items-center border rounded-lg bg-muted cursor-pointer 
+      className="group px-8 py-8 flex flex-row justify-between items-center rounded-2xl 
+      bg-gradient-to-br from-gray-900/50 to-gray-800/30 border border-gray-700/50 
+      cursor-pointer backdrop-blur-sm
       transition-all duration-300 ease-in-out
-      hover:bg-background hover:border-[#E93F3F] hover:scale-[1.02]
-      shadow-[0_2px_10px_rgba(0,0,0,0.08)]
-      hover:shadow-[0_10px_30px_rgba(233,63,63,0.15)]"
+      hover:border-purple-500/40 hover:scale-[1.02] hover:shadow-lg hover:shadow-purple-500/20
+      relative overflow-hidden"
     >
-      <div className="flex flex-row justify-center items-start gap-4">
-        <Button
-          variant={"outline"}
-          className="flex justify-center items-center bg-white group-hover:bg-[#fff8f8] group-hover:border-[#E93F3F] group-hover:text-[#E93F3F] transition-colors duration-300"
-          size={"icon"}
-        >
-          <ArrowDown size={30} className="transition-transform duration-300 group-hover:translate-y-1" />
-        </Button>
+      {/* Animated background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-transparent to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      
+      <div className="relative z-10 flex flex-row justify-center items-start gap-6">
+        <div className="w-14 h-14 bg-gradient-to-br from-purple-400 to-pink-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-purple-500/25">
+          <Github size={24} className="text-white transition-transform duration-300 group-hover:translate-y-1" />
+        </div>
         <div className="flex flex-col">
-          <h1 className="text-xl font-bold text-[#e93f3f]">Open Github Repository</h1>
-          <p className="text-sm text-muted-foreground max-w-[220px]">Work with your repositories in our editor</p>
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-2">
+            Import Repository
+          </h1>
+          <p className="text-gray-400 max-w-[250px] leading-relaxed">
+            Connect your GitHub repositories and edit them in the cloud
+          </p>
+          <div className="flex items-center gap-2 mt-3">
+            <GitBranch className="w-4 h-4 text-purple-400" />
+            <span className="text-sm text-purple-400 font-medium">Git Integration</span>
+          </div>
         </div>
       </div>
 
-      <div className="relative overflow-hidden">
-        <Image
-          src={"/github.svg"}
-          alt="Open GitHub repository"
-          width={150}
-          height={150}
-          className="transition-transform duration-300 group-hover:scale-110"
-        />
+      <div className="relative z-10 w-24 h-24 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+        <Github size={32} className="text-purple-400" />
       </div>
     </div>
   )

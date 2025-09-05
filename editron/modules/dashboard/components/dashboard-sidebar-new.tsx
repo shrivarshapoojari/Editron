@@ -20,7 +20,6 @@ import {
   Database,
   FlameIcon,
 } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import {
   Sidebar,
   SidebarContent,
@@ -35,7 +34,6 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar"
-import Image from "next/image"
 
 // Define the interface for a single playground item, icon is now a string
 interface PlaygroundData {
@@ -77,6 +75,7 @@ export function DashboardSidebar({ initialPlaygroundData }: { initialPlaygroundD
           </div>
         </div>
       </SidebarHeader>
+      
       <SidebarContent className="bg-transparent">
         <SidebarGroup>
           <SidebarMenu>
@@ -105,13 +104,12 @@ export function DashboardSidebar({ initialPlaygroundData }: { initialPlaygroundD
             Starred Projects
           </SidebarGroupLabel>
           <SidebarGroupAction title="Add starred playground">
-            <Plus className="h-4 w-4" />
+            <Plus className="h-4 w-4 text-cyan-400" />
           </SidebarGroupAction>
           <SidebarGroupContent>
             <SidebarMenu>
-
               {starredPlaygrounds.length === 0 && recentPlaygrounds.length === 0 ? (
-                <div className="text-center text-muted-foreground py-4 w-full">Create your playground</div>
+                <div className="text-center text-gray-400 py-4 w-full text-sm">Create your first playground</div>
               ) : (
                 starredPlaygrounds.map((playground) => {
                   const IconComponent = lucideIconMap[playground.icon] || Code2;
@@ -121,6 +119,7 @@ export function DashboardSidebar({ initialPlaygroundData }: { initialPlaygroundD
                         asChild
                         isActive={pathname === `/playground/${playground.id}`}
                         tooltip={playground.name}
+                        className="hover:bg-gray-800/50 data-[active=true]:bg-purple-500/20 data-[active=true]:text-purple-400"
                       >
                         <Link href={`/playground/${playground.id}`}>
                           {IconComponent && <IconComponent className="h-4 w-4" />}
@@ -136,12 +135,12 @@ export function DashboardSidebar({ initialPlaygroundData }: { initialPlaygroundD
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel>
-            <History className="h-4 w-4 mr-2" />
-            Recent
+          <SidebarGroupLabel className="text-purple-400 font-semibold">
+            <History className="h-4 w-4 mr-2 text-purple-400" />
+            Recent Projects
           </SidebarGroupLabel>
           <SidebarGroupAction title="Create new playground">
-            <FolderPlus className="h-4 w-4" />
+            <FolderPlus className="h-4 w-4 text-purple-400" />
           </SidebarGroupAction>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -154,6 +153,7 @@ export function DashboardSidebar({ initialPlaygroundData }: { initialPlaygroundD
                         asChild
                         isActive={pathname === `playground/${playground.id}`}
                         tooltip={playground.name}
+                        className="hover:bg-gray-800/50 data-[active=true]:bg-green-500/20 data-[active=true]:text-green-400"
                       >
                         <Link href={`/playground/${playground.id}`}>
                           {IconComponent && <IconComponent className="h-4 w-4" />}
@@ -165,9 +165,9 @@ export function DashboardSidebar({ initialPlaygroundData }: { initialPlaygroundD
                 })
               )}
               <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="View all">
+                <SidebarMenuButton asChild tooltip="View all" className="hover:bg-gray-800/50">
                   <Link href="/playgrounds">
-                    <span className="text-sm text-muted-foreground">View all playgrounds</span>
+                    <span className="text-sm text-gray-400">View all playgrounds</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -175,10 +175,11 @@ export function DashboardSidebar({ initialPlaygroundData }: { initialPlaygroundD
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
+      
+      <SidebarFooter className="bg-transparent border-t border-gray-800/50">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild tooltip="Settings">
+            <SidebarMenuButton asChild tooltip="Settings" className="hover:bg-gray-800/50">
               <Link href="/settings">
                 <Settings className="h-4 w-4" />
                 <span>Settings</span>
