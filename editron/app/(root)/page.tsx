@@ -37,10 +37,10 @@ export default function Home() {
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </Link>
-          <Button variant="outline" size="lg" className="border-gray-700 text-gray-300 hover:text-white hover:border-gray-600 px-8 py-6 text-lg font-semibold bg-transparent backdrop-blur-sm">
+          {/* <Button variant="outline" size="lg" className="border-gray-700 text-gray-300 hover:text-white hover:border-gray-600 px-8 py-6 text-lg font-semibold bg-transparent backdrop-blur-sm">
             <Terminal className="w-5 h-5 mr-2" />
             View Demo
-          </Button>
+          </Button> */}
         </div>
 
         {/* Features Grid */}
@@ -77,7 +77,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Stats Section */}
+      {/* Stats Section
       <div className="w-full max-w-6xl mx-auto px-4 py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div className="text-center">
@@ -105,7 +105,7 @@ export default function Home() {
             <div className="text-gray-400">Support</div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
