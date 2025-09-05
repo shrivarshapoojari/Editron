@@ -7,8 +7,10 @@ export default function PlaygroundLayout({
   children: React.ReactNode;
 }) {
   return (
-    <SidebarProvider>
-      {children}
-    </SidebarProvider>
+    <div className="min-h-screen bg-gradient-to-br from-gray-950 to-black">
+      <SidebarProvider>
+        {children}
+      </SidebarProvider>
+    </div>
   );
 }

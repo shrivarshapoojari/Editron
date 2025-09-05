@@ -132,22 +132,31 @@ export function TemplateFileTree({
   };
 
   return (
-    <Sidebar>
-      <SidebarContent>
+    <Sidebar className="bg-gradient-to-b from-gray-950 to-black border-r border-gray-800/50">
+      <SidebarContent className="bg-transparent">
         <SidebarGroup>
-          <SidebarGroupLabel>{title}</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-gray-300 font-semibold">{title}</SidebarGroupLabel>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <SidebarGroupAction>
+              <SidebarGroupAction className="text-gray-400 hover:text-cyan-400 hover:bg-gray-800/50">
                 <Plus className="h-4 w-4" />
               </SidebarGroupAction>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={handleAddRootFile}>
+            <DropdownMenuContent 
+              align="end"
+              className="bg-gray-900/95 backdrop-blur-xl border-gray-700/50 shadow-2xl"
+            >
+              <DropdownMenuItem 
+                onClick={handleAddRootFile}
+                className="text-gray-300 hover:text-white"
+              >
                 <FilePlus className="h-4 w-4 mr-2" />
                 New File
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={handleAddRootFolder}>
+              <DropdownMenuItem 
+                onClick={handleAddRootFolder}
+                className="text-gray-300 hover:text-white"
+              >
                 <FolderPlus className="h-4 w-4 mr-2" />
                 New Folder
               </DropdownMenuItem>
@@ -191,7 +200,7 @@ export function TemplateFileTree({
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarRail />
+      <SidebarRail className="bg-gray-800/30" />
 
       <NewFileDialog
         isOpen={isNewFileDialogOpen}
@@ -288,7 +297,11 @@ function TemplateNode({
           <SidebarMenuButton
             isActive={isSelected}
             onClick={() => onFileSelect?.(file)}
-            className="flex-1"
+            className={`flex-1 transition-colors duration-200 ${
+              isSelected 
+                ? "bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 text-cyan-400" 
+                : "text-gray-400 hover:text-white hover:bg-gray-800/50"
+            }`}
           >
             <File className="h-4 w-4 mr-2 shrink-0" />
             <span>{fileName}</span>
@@ -299,20 +312,26 @@ function TemplateNode({
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity"
+                className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity text-gray-400 hover:text-white hover:bg-gray-800/50"
               >
                 <MoreHorizontal className="h-3 w-3" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={handleRename}>
+            <DropdownMenuContent 
+              align="end"
+              className="bg-gray-900/95 backdrop-blur-xl border-gray-700/50 shadow-2xl"
+            >
+              <DropdownMenuItem 
+                onClick={handleRename}
+                className="text-gray-300 hover:text-white"
+              >
                 <Edit3 className="h-4 w-4 mr-2" />
                 Rename
               </DropdownMenuItem>
-              <DropdownMenuSeparator />
+              <DropdownMenuSeparator className="bg-gray-700/50" />
               <DropdownMenuItem
                 onClick={handleDelete}
-                className="text-destructive"
+                className="text-red-400 hover:text-red-300"
               >
                 <Trash2 className="h-4 w-4 mr-2" />
                 Delete
@@ -404,9 +423,9 @@ function TemplateNode({
         >
           <div className="flex items-center group">
             <CollapsibleTrigger asChild>
-              <SidebarMenuButton className="flex-1">
-                <ChevronRight className="transition-transform" />
-                <Folder className="h-4 w-4 mr-2 shrink-0" />
+              <SidebarMenuButton className="flex-1 text-gray-300 hover:text-white hover:bg-gray-800/50">
+                <ChevronRight className="transition-transform text-gray-500" />
+                <Folder className="h-4 w-4 mr-2 shrink-0 text-blue-400" />
                 <span>{folderName}</span>
               </SidebarMenuButton>
             </CollapsibleTrigger>
@@ -416,29 +435,41 @@ function TemplateNode({
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity text-gray-400 hover:text-white hover:bg-gray-800/50"
                 >
                   <MoreHorizontal className="h-3 w-3" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={handleAddFile}>
+              <DropdownMenuContent 
+                align="end"
+                className="bg-gray-900/95 backdrop-blur-xl border-gray-700/50 shadow-2xl"
+              >
+                <DropdownMenuItem 
+                  onClick={handleAddFile}
+                  className="text-gray-300 hover:text-white"
+                >
                   <FilePlus className="h-4 w-4 mr-2" />
                   New File
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={handleAddFolder}>
+                <DropdownMenuItem 
+                  onClick={handleAddFolder}
+                  className="text-gray-300 hover:text-white"
+                >
                   <FolderPlus className="h-4 w-4 mr-2" />
                   New Folder
                 </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={handleRename}>
+                <DropdownMenuSeparator className="bg-gray-700/50" />
+                <DropdownMenuItem 
+                  onClick={handleRename}
+                  className="text-gray-300 hover:text-white"
+                >
                   <Edit3 className="h-4 w-4 mr-2" />
                   Rename
                 </DropdownMenuItem>
-                <DropdownMenuSeparator />
+                <DropdownMenuSeparator className="bg-gray-700/50" />
                 <DropdownMenuItem
                   onClick={handleDelete}
-                  className="text-destructive"
+                  className="text-red-400 hover:text-red-300"
                 >
                   <Trash2 className="h-4 w-4 mr-2" />
                   Delete

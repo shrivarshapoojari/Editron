@@ -295,15 +295,22 @@ const MainPlaygroundPage = () => {
 
   if (error) {
     return (
-      <div className="flex flex-col items-center justify-center h-[calc(100vh-4rem)] p-4">
-        <AlertCircle className="h-12 w-12 text-red-500 mb-4" />
-        <h2 className="text-xl font-semibold text-red-600 mb-2">
-          Something went wrong
-        </h2>
-        <p className="text-gray-600 mb-4">{error}</p>
-        <Button onClick={() => window.location.reload()} variant="destructive">
-          Try Again
-        </Button>
+      <div className="flex flex-col items-center justify-center h-[calc(100vh-4rem)] p-4 bg-gradient-to-br from-gray-950 to-black">
+        <div className="w-full max-w-md p-8 rounded-2xl bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-xl border border-red-500/30 shadow-2xl shadow-red-500/10">
+          <div className="w-16 h-16 bg-gradient-to-br from-red-500/20 to-red-600/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <AlertCircle className="h-8 w-8 text-red-400" />
+          </div>
+          <h2 className="text-xl font-semibold text-red-400 mb-4 text-center">
+            Something went wrong
+          </h2>
+          <p className="text-gray-400 mb-6 text-center">{error}</p>
+          <Button 
+            onClick={() => window.location.reload()} 
+            className="w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white border-none"
+          >
+            Try Again
+          </Button>
+        </div>
       </div>
     );
   }
@@ -311,12 +318,15 @@ const MainPlaygroundPage = () => {
   // Loading state
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center h-[calc(100vh-4rem)] p-4">
-        <div className="w-full max-w-md p-6 rounded-lg shadow-sm border">
-          <h2 className="text-xl font-semibold mb-6 text-center">
+      <div className="flex flex-col items-center justify-center h-[calc(100vh-4rem)] p-4 bg-gradient-to-br from-gray-950 to-black">
+        <div className="w-full max-w-md p-8 rounded-2xl bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-xl border border-cyan-500/30 shadow-2xl shadow-cyan-500/10">
+          <div className="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <div className="w-8 h-8 bg-white rounded-md animate-pulse" />
+          </div>
+          <h2 className="text-xl font-semibold mb-6 text-center bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
             Loading Playground
           </h2>
-          <div className="mb-8">
+          <div className="mb-8 space-y-4">
             <LoadingStep
               currentStep={1}
               step={1}
@@ -337,14 +347,21 @@ const MainPlaygroundPage = () => {
   // No template data
   if (!templateData) {
     return (
-      <div className="flex flex-col items-center justify-center h-[calc(100vh-4rem)] p-4">
-        <FolderOpen className="h-12 w-12 text-amber-500 mb-4" />
-        <h2 className="text-xl font-semibold text-amber-600 mb-2">
-          No template data available
-        </h2>
-        <Button onClick={() => window.location.reload()} variant="outline">
-          Reload Template
-        </Button>
+      <div className="flex flex-col items-center justify-center h-[calc(100vh-4rem)] p-4 bg-gradient-to-br from-gray-950 to-black">
+        <div className="w-full max-w-md p-8 rounded-2xl bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-xl border border-amber-500/30 shadow-2xl shadow-amber-500/10">
+          <div className="w-16 h-16 bg-gradient-to-br from-amber-500/20 to-orange-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <FolderOpen className="h-8 w-8 text-amber-400" />
+          </div>
+          <h2 className="text-xl font-semibold text-amber-400 mb-4 text-center">
+            No template data available
+          </h2>
+          <Button 
+            onClick={() => window.location.reload()} 
+            className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white border-none"
+          >
+            Reload Template
+          </Button>
+        </div>
       </div>
     );
   }
@@ -365,18 +382,23 @@ const MainPlaygroundPage = () => {
           onRenameFolder={wrappedHandleRenameFolder}
         />
         <SidebarInset>
-          <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-            <SidebarTrigger className="-ml-1" />
-            <Separator orientation="vertical" className="mr-2 h-4" />
+          <header className="flex h-16 shrink-0 items-center gap-2 border-b border-gray-800/50 bg-gradient-to-r from-gray-900/50 to-gray-800/50 backdrop-blur-xl px-4">
+            <SidebarTrigger className="-ml-1 text-gray-400 hover:text-white" />
+            <Separator orientation="vertical" className="mr-2 h-4 bg-gray-700" />
 
             <div className="flex flex-1 items-center gap-2">
               <div className="flex flex-col flex-1">
-                <h1 className="text-sm font-medium">
+                <h1 className="text-sm font-medium text-white">
                   {playgroundData?.title || "Code Playground"}
                 </h1>
-                <p className="text-xs text-muted-foreground">
+                <p className="text-xs text-gray-400">
                   {openFiles.length} File(s) Open
-                  {hasUnsavedChanges && " • Unsaved changes"}
+                  {hasUnsavedChanges && (
+                    <>
+                      <span className="mx-1">•</span>
+                      <span className="text-amber-400">Unsaved changes</span>
+                    </>
+                  )}
                 </p>
               </div>
 
@@ -388,11 +410,12 @@ const MainPlaygroundPage = () => {
                       variant="outline"
                       onClick={() => handleSave()}
                       disabled={!activeFile || !activeFile.hasUnsavedChanges}
+                      className="bg-gray-800/50 border-gray-600/50 text-gray-300 hover:bg-gray-700/50 hover:text-white disabled:opacity-50"
                     >
                       <Save className="h-4 w-4" />
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent>Save (Ctrl+S)</TooltipContent>
+                  <TooltipContent className="bg-gray-900/95 border-gray-700/50 text-gray-300">Save (Ctrl+S)</TooltipContent>
                 </Tooltip>
 
                 <Tooltip>
@@ -402,11 +425,12 @@ const MainPlaygroundPage = () => {
                       variant="outline"
                       onClick={handleSaveAll}
                       disabled={!hasUnsavedChanges}
+                      className="bg-gray-800/50 border-gray-600/50 text-gray-300 hover:bg-gray-700/50 hover:text-white disabled:opacity-50"
                     >
                       <Save className="h-4 w-4" /> All
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent>Save All (Ctrl+Shift+S)</TooltipContent>
+                  <TooltipContent className="bg-gray-900/95 border-gray-700/50 text-gray-300">Save All (Ctrl+Shift+S)</TooltipContent>
                 </Tooltip>
 
                <ToggleAI
@@ -417,18 +441,29 @@ const MainPlaygroundPage = () => {
 
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button size="sm" variant="outline">
+                    <Button 
+                      size="sm" 
+                      variant="outline"
+                      className="bg-gray-800/50 border-gray-600/50 text-gray-300 hover:bg-gray-700/50 hover:text-white"
+                    >
                       <Settings className="h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
+                  <DropdownMenuContent 
+                    align="end"
+                    className="bg-gray-900/95 backdrop-blur-xl border-gray-700/50 shadow-2xl"
+                  >
                     <DropdownMenuItem
                       onClick={() => setIsPreviewVisible(!isPreviewVisible)}
+                      className="text-gray-300 hover:text-white"
                     >
                       {isPreviewVisible ? "Hide" : "Show"} Preview
                     </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={closeAllFiles}>
+                    <DropdownMenuSeparator className="bg-gray-700/50" />
+                    <DropdownMenuItem 
+                      onClick={closeAllFiles}
+                      className="text-gray-300 hover:text-white"
+                    >
                       Close All Files
                     </DropdownMenuItem>
                   </DropdownMenuContent>
@@ -440,7 +475,7 @@ const MainPlaygroundPage = () => {
           <div className="h-[calc(100vh-4rem)]">
             {openFiles.length > 0 ? (
               <div className="h-full flex flex-col">
-                <div className="border-b bg-muted/30">
+                <div className="border-b border-gray-800/50 bg-gray-900/30">
                   <Tabs
                     value={activeFileId || ""}
                     onValueChange={setActiveFileId}
@@ -451,7 +486,7 @@ const MainPlaygroundPage = () => {
                           <TabsTrigger
                             key={file.id}
                             value={file.id}
-                            className="relative h-8 px-3 data-[state=active]:bg-background data-[state=active]:shadow-sm group"
+                            className="relative h-8 px-3 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500/20 data-[state=active]:to-blue-500/20 data-[state=active]:border data-[state=active]:border-cyan-500/30 data-[state=active]:text-cyan-400 data-[state=active]:shadow-lg text-gray-400 hover:text-white rounded-lg group"
                           >
                             <div className="flex items-center gap-2">
                               <FileText className="h-3 w-3" />
@@ -459,10 +494,10 @@ const MainPlaygroundPage = () => {
                                 {file.filename}.{file.fileExtension}
                               </span>
                               {file.hasUnsavedChanges && (
-                                <span className="h-2 w-2 rounded-full bg-orange-500" />
+                                <span className="h-2 w-2 rounded-full bg-orange-400 animate-pulse" />
                               )}
                               <span
-                                className="ml-2 h-4 w-4 hover:bg-destructive hover:text-destructive-foreground rounded-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                                className="ml-2 h-4 w-4 hover:bg-red-500 hover:text-white rounded-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all cursor-pointer"
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   closeFile(file.id);
@@ -480,7 +515,7 @@ const MainPlaygroundPage = () => {
                           size="sm"
                           variant="ghost"
                           onClick={closeAllFiles}
-                          className="h-6 px-2 text-xs"
+                          className="h-6 px-2 text-xs text-gray-400 hover:text-white hover:bg-gray-800/50"
                         >
                           Close All
                         </Button>
@@ -534,10 +569,12 @@ const MainPlaygroundPage = () => {
                 </div>
               </div>
             ) : (
-              <div className="flex flex-col h-full items-center justify-center text-muted-foreground gap-4">
-                <FileText className="h-16 w-16 text-gray-300" />
+              <div className="flex flex-col h-full items-center justify-center bg-gradient-to-br from-gray-950 to-black gap-6">
+                <div className="w-20 h-20 bg-gradient-to-br from-gray-800/50 to-gray-700/50 rounded-2xl flex items-center justify-center border border-gray-700/50">
+                  <FileText className="h-10 w-10 text-gray-500" />
+                </div>
                 <div className="text-center">
-                  <p className="text-lg font-medium">No files open</p>
+                  <p className="text-lg font-medium text-gray-300 mb-2">No files open</p>
                   <p className="text-sm text-gray-500">
                     Select a file from the sidebar to start editing
                   </p>
