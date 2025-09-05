@@ -321,7 +321,7 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
                 <>
                     {/* Backdrop */}
                     <div
-                        className="ai-chat-backdrop fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 opacity-100"
+                        className="ai-chat-backdrop fixed inset-0 bg-black/30 transition-opacity duration-300 opacity-100"
                         style={{ 
                             height: '100vh', 
                             width: '100vw',
