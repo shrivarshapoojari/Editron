@@ -350,12 +350,10 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
                     <div className="shrink-0 border-b border-cyan-500/20 bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-sm">
                         <div className="flex items-center justify-between p-6">
                             <div className="flex items-center gap-3">
-                                <div className="relative w-10 h-10 border rounded-full flex flex-col justify-center items-center">
-                                    <Image src={"/logo.svg"} alt="Logo" width={28} height={28} />
-                                </div>
+                               
                                 <div>
                                     <h2 className="text-lg font-semibold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                                        Enhanced AI Assistant
+                                        Editron AI
                                     </h2>
                                     <p className="text-sm text-gray-400">
                                         {messages.length} messages
@@ -365,13 +363,7 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
                             <div className="flex items-center gap-2">
                                 <DropdownMenu>
                                     <DropdownMenuTrigger asChild>
-                                        <Button
-                                            variant="ghost"
-                                            size="sm"
-                                            className="text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800"
-                                        >
-                                            <Settings className="h-4 w-4" />
-                                        </Button>
+                                      
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent align="end">
                                         <DropdownMenuCheckboxItem
@@ -415,85 +407,32 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
                             className="px-6"
                         >
                             <div className="flex items-center justify-between mb-4">
-                                <TabsList className="grid w-full grid-cols-4 max-w-md bg-gray-800/50 border border-cyan-500/20">
-                                    <TabsTrigger value="chat" className="flex items-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-600 data-[state=active]:to-blue-600 data-[state=active]:text-white text-gray-400 hover:text-cyan-300">
+                                <TabsList className="grid w-full grid-cols-4 bg-gray-800/50 border border-cyan-500/20">
+                                    <TabsTrigger value="chat" className="flex items-center gap-1 text-xs data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-600 data-[state=active]:to-blue-600 data-[state=active]:text-white text-gray-400 hover:text-cyan-300">
                                         <MessageSquare className="h-3 w-3" />
-                                        Chat
+                                        <span className="hidden sm:inline">Chat</span>
                                     </TabsTrigger>
                                     <TabsTrigger
                                         value="review"
-                                        className="flex items-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-600 data-[state=active]:to-blue-600 data-[state=active]:text-white text-gray-400 hover:text-cyan-300"
+                                        className="flex items-center gap-1 text-xs data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-600 data-[state=active]:to-blue-600 data-[state=active]:text-white text-gray-400 hover:text-cyan-300"
                                     >
                                         <Code className="h-3 w-3" />
-                                        Review
+                                        <span className="hidden sm:inline">Review</span>
                                     </TabsTrigger>
-                                    <TabsTrigger value="fix" className="flex items-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-600 data-[state=active]:to-blue-600 data-[state=active]:text-white text-gray-400 hover:text-cyan-300">
+                                    <TabsTrigger value="fix" className="flex items-center gap-1 text-xs data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-600 data-[state=active]:to-blue-600 data-[state=active]:text-white text-gray-400 hover:text-cyan-300">
                                         <RefreshCw className="h-3 w-3" />
-                                        Fix
+                                        <span className="hidden sm:inline">Fix</span>
                                     </TabsTrigger>
                                     <TabsTrigger
                                         value="optimize"
-                                        className="flex items-center gap-1 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-600 data-[state=active]:to-blue-600 data-[state=active]:text-white text-gray-400 hover:text-cyan-300"
+                                        className="flex items-center gap-1 text-xs data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-600 data-[state=active]:to-blue-600 data-[state=active]:text-white text-gray-400 hover:text-cyan-300"
                                     >
                                         <Zap className="h-3 w-3" />
-                                        Optimize
+                                        <span className="hidden sm:inline">Boost</span>
                                     </TabsTrigger>
                                 </TabsList>
 
-                                <div className="flex items-center gap-2">
-                                    <div className="hidden sm:flex items-center gap-2 text-xs text-zinc-400">
-                                        <span className="text-zinc-500">Model:</span>
-                                        <select
-                                            value={model}
-                                            onChange={(e) => setModel(e.target.value)}
-                                            className="bg-zinc-900/60 border border-zinc-800 rounded px-2 py-1 text-zinc-200 focus:outline-none"
-                                        >
-                                            <option value="gpt-6">gpt-6</option>
-                                            <option value="codellama">codellama</option>
-                                            <option value="llama2">llama2</option>
-                                        </select>
-                                    </div>
-                                    <div className="relative">
-                                        <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 h-3 w-3 text-zinc-500" />
-                                        <Input
-                                            placeholder="Search messages..."
-                                            value={searchTerm}
-                                            onChange={(e) => setSearchTerm(e.target.value)}
-                                            className="pl-7 h-8 w-40 bg-zinc-800/50 border-zinc-700/50"
-                                        />
-                                    </div>
-
-                                    <DropdownMenu>
-                                        <DropdownMenuTrigger asChild>
-                                            <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                                                <Filter className="h-3 w-3" />
-                                            </Button>
-                                        </DropdownMenuTrigger>
-                                        <DropdownMenuContent align="end">
-                                            <DropdownMenuItem onClick={() => setFilterType("all")}>
-                                                All Messages
-                                            </DropdownMenuItem>
-                                            <DropdownMenuItem onClick={() => setFilterType("chat")}>
-                                                Chat Only
-                                            </DropdownMenuItem>
-                                            <DropdownMenuItem
-                                                onClick={() => setFilterType("code_review")}
-                                            >
-                                                Code Reviews
-                                            </DropdownMenuItem>
-                                            <DropdownMenuItem
-                                                onClick={() => setFilterType("error_fix")}
-                                            >
-                                                Error Fixes
-                                            </DropdownMenuItem>
-                                            <DropdownMenuItem
-                                                onClick={() => setFilterType("optimization")}
-                                            >
-                                                Optimizations
-                                            </DropdownMenuItem>
-                                        </DropdownMenuContent>
-                                    </DropdownMenu>
-                                </div>
+                                
                             </div>
                         </Tabs>
                     </div>
@@ -507,7 +446,7 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
                                         <Brain className="h-8 w-8 text-cyan-400" />
                                     </div>
                                     <h3 className="text-xl font-semibold mb-3 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                                        Enhanced AI Assistant
+                                        Editron AI Assistant
                                     </h3>
                                     <p className="text-gray-400 max-w-md mx-auto leading-relaxed mb-6">
                                         Advanced AI coding assistant with comprehensive analysis
