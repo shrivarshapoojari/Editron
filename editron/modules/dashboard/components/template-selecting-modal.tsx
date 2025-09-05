@@ -212,7 +212,7 @@ const TemplateSelectionModal = ({
           key={i}
           size={14}
           className={
-            i < count ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+            i < count ? "fill-yellow-400 text-yellow-400" : "fill-gray-600 text-gray-600"
           }
         />
       ));
@@ -231,15 +231,17 @@ const TemplateSelectionModal = ({
         }
       }}
     >
-      <DialogContent className="sm:max-w-[800px] max-h-[90vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-[900px] max-h-[90vh] overflow-y-auto bg-gray-900/95 backdrop-blur-xl border-gray-700/50 shadow-2xl">
         {step === "select" ? (
           <>
             <DialogHeader>
-              <DialogTitle className="text-2xl font-bold text-[#e93f3f] flex items-center gap-2">
-                <Plus size={24} className="text-[#e93f3f]" />
+              <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent flex items-center gap-2">
+                <div className="w-8 h-8 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center">
+                  <Plus size={18} className="text-white" />
+                </div>
                 Select a Template
               </DialogTitle>
-              <DialogDescription>
+              <DialogDescription className="text-gray-400">
                 Choose a template to create your new playground
               </DialogDescription>
             </DialogHeader>
@@ -255,7 +257,7 @@ const TemplateSelectionModal = ({
                     placeholder="Search templates..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10"
+                    className="pl-10 bg-gray-800/50 border-gray-600/50 text-white placeholder:text-gray-500 focus:border-cyan-500/50"
                   />
                 </div>
 
@@ -264,11 +266,31 @@ const TemplateSelectionModal = ({
                   className="w-full sm:w-auto"
                   onValueChange={(value) => setCategory(value as any)}
                 >
-                  <TabsList className="grid grid-cols-4 w-full sm:w-[400px]">
-                    <TabsTrigger value="all">All</TabsTrigger>
-                    <TabsTrigger value="frontend">Frontend</TabsTrigger>
-                    <TabsTrigger value="backend">Backend</TabsTrigger>
-                    <TabsTrigger value="fullstack">Fullstack</TabsTrigger>
+                  <TabsList className="grid grid-cols-4 w-full sm:w-[400px] bg-gray-800/50 border-gray-600/50">
+                    <TabsTrigger 
+                      value="all"
+                      className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500/20 data-[state=active]:to-blue-500/20 data-[state=active]:text-cyan-400 data-[state=active]:border-cyan-500/30 text-gray-400"
+                    >
+                      All
+                    </TabsTrigger>
+                    <TabsTrigger 
+                      value="frontend"
+                      className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500/20 data-[state=active]:to-blue-500/20 data-[state=active]:text-cyan-400 data-[state=active]:border-cyan-500/30 text-gray-400"
+                    >
+                      Frontend
+                    </TabsTrigger>
+                    <TabsTrigger 
+                      value="backend"
+                      className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500/20 data-[state=active]:to-blue-500/20 data-[state=active]:text-cyan-400 data-[state=active]:border-cyan-500/30 text-gray-400"
+                    >
+                      Backend
+                    </TabsTrigger>
+                    <TabsTrigger 
+                      value="fullstack"
+                      className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500/20 data-[state=active]:to-blue-500/20 data-[state=active]:text-cyan-400 data-[state=active]:border-cyan-500/30 text-gray-400"
+                    >
+                      Fullstack
+                    </TabsTrigger>
                   </TabsList>
                 </Tabs>
               </div>
@@ -282,30 +304,34 @@ const TemplateSelectionModal = ({
                     filteredTemplates.map((template) => (
                       <div
                         key={template.id}
-                        className={`relative flex p-6 border rounded-lg cursor-pointer transition-all duration-300 hover:scale-[1.02]
+                        className={`relative flex p-6 rounded-xl cursor-pointer transition-all duration-300 hover:scale-[1.02] group
                           ${
                             selectedTemplate === template.id
-                              ? "border-[#E93F3F]  shadow-[0_0_0_1px_#E93F3F,0_8px_20px_rgba(233,63,63,0.15)]"
-                              : "hover:border-[#E93F3F] shadow-[0_2px_8px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_20px_rgba(0,0,0,0.1)]"
-                          }
-                          
-                          `}
+                              ? "bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/50 shadow-2xl shadow-cyan-500/20"
+                              : "bg-gray-800/40 border border-gray-700/50 hover:border-cyan-500/30 hover:shadow-xl hover:shadow-cyan-500/10"
+                          }`}
                         onClick={() => handleSelectTemplate(template.id)}
                       >
+                        {/* Background gradient effect */}
+                        <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        
                         <div className="absolute top-4 right-4 flex gap-1">
                           {renderStars(template.popularity)}
                         </div>
 
                         {selectedTemplate === template.id && (
-                          <div className="absolute top-2 left-2 bg-[#E93F3F] text-white rounded-full p-1">
+                          <div className="absolute top-2 left-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-full p-1.5 shadow-lg">
                             <Check size={14} />
                           </div>
                         )}
 
-                        <div className="flex gap-4">
+                        <div className="relative z-10 flex gap-4 w-full">
                           <div
-                            className="relative w-16 h-16 flex-shrink-0 flex items-center justify-center rounded-full"
-                            style={{ backgroundColor: `${template.color}15` }}
+                            className={`relative w-16 h-16 flex-shrink-0 flex items-center justify-center rounded-xl border transition-colors ${
+                              selectedTemplate === template.id 
+                                ? "bg-gradient-to-br from-cyan-500/20 to-blue-500/20 border-cyan-500/30" 
+                                : "bg-gray-700/50 border-gray-600/50 group-hover:border-gray-500/50"
+                            }`}
                           >
                             <Image
                               src={template.icon || "/placeholder.svg"}
@@ -316,31 +342,27 @@ const TemplateSelectionModal = ({
                             />
                           </div>
 
-                          <div className="flex flex-col">
+                          <div className="flex flex-col flex-1">
                             <div className="flex items-center gap-2 mb-1">
-                              <h3 className="text-lg font-semibold">
+                              <h3 className={`text-lg font-semibold transition-colors ${
+                                selectedTemplate === template.id ? "text-cyan-400" : "text-white"
+                              }`}>
                                 {template.name}
                               </h3>
                               <div className="flex gap-1">
                                 {template.category === "frontend" && (
-                                  <Code size={14} className="text-blue-500" />
+                                  <Code size={14} className="text-blue-400" />
                                 )}
                                 {template.category === "backend" && (
-                                  <Server
-                                    size={14}
-                                    className="text-green-500"
-                                  />
+                                  <Server size={14} className="text-green-400" />
                                 )}
                                 {template.category === "fullstack" && (
-                                  <Globe
-                                    size={14}
-                                    className="text-purple-500"
-                                  />
+                                  <Globe size={14} className="text-purple-400" />
                                 )}
                               </div>
                             </div>
 
-                            <p className="text-sm text-muted-foreground mb-3">
+                            <p className="text-sm text-gray-400 mb-3 leading-relaxed">
                               {template.description}
                             </p>
 
@@ -348,7 +370,11 @@ const TemplateSelectionModal = ({
                               {template.tags.map((tag) => (
                                 <span
                                   key={tag}
-                                  className="text-xs px-2 py-1 border rounded-2xl"
+                                  className={`text-xs px-2 py-1 rounded-full transition-colors ${
+                                    selectedTemplate === template.id
+                                      ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30"
+                                      : "bg-gray-700/50 text-gray-300 border border-gray-600/50"
+                                  }`}
                                 >
                                   {tag}
                                 </span>
@@ -366,11 +392,13 @@ const TemplateSelectionModal = ({
                     ))
                   ) : (
                     <div className="col-span-2 flex flex-col items-center justify-center p-8 text-center">
-                      <Search size={48} className="text-gray-300 mb-4" />
-                      <h3 className="text-lg font-medium">
+                      <div className="w-16 h-16 bg-gray-800/50 rounded-2xl flex items-center justify-center mb-4">
+                        <Search size={32} className="text-gray-500" />
+                      </div>
+                      <h3 className="text-lg font-medium text-white mb-2">
                         No templates found
                       </h3>
-                      <p className="text-sm text-muted-foreground">
+                      <p className="text-sm text-gray-400">
                         Try adjusting your search or filters
                       </p>
                     </div>
@@ -379,20 +407,26 @@ const TemplateSelectionModal = ({
               </RadioGroup>
             </div>
 
-            <div className="flex justify-between gap-3 mt-4 pt-4 border-t">
-              <div className="flex items-center text-sm text-muted-foreground">
-                <Clock size={14} className="mr-1" />
+            <div className="flex justify-between gap-3 mt-6 pt-4 border-t border-gray-700/50">
+              <div className="flex items-center text-sm text-gray-400">
+                <Clock size={14} className="mr-2 text-cyan-400" />
                 <span>
                   Estimated setup time:{" "}
-                  {selectedTemplate ? "2-5 minutes" : "Select a template"}
+                  <span className="text-cyan-400">
+                    {selectedTemplate ? "2-5 minutes" : "Select a template"}
+                  </span>
                 </span>
               </div>
               <div className="flex gap-3">
-                <Button variant="outline" onClick={onClose}>
+                <Button 
+                  variant="outline" 
+                  onClick={onClose}
+                  className="bg-gray-800/50 border-gray-600/50 text-gray-300 hover:bg-gray-700/50 hover:text-white"
+                >
                   Cancel
                 </Button>
                 <Button
-                  className="bg-[#E93F3F] hover:bg-[#d03636] text-white"
+                  className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white border-none shadow-lg"
                   disabled={!selectedTemplate}
                   onClick={handleContinue}
                 >
@@ -404,10 +438,10 @@ const TemplateSelectionModal = ({
         ) : (
           <>
             <DialogHeader>
-              <DialogTitle className="text-2xl font-bold text-[#e93f3f]">
+              <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                 Configure Your Project
               </DialogTitle>
-              <DialogDescription>
+              <DialogDescription className="text-gray-400">
                 {templates.find((t) => t.id === selectedTemplate)?.name} project
                 configuration
               </DialogDescription>
@@ -415,36 +449,43 @@ const TemplateSelectionModal = ({
 
             <div className="flex flex-col gap-6 py-4">
               <div className="flex flex-col gap-2">
-                <Label htmlFor="project-name">Project Name</Label>
+                <Label htmlFor="project-name" className="text-gray-300">Project Name</Label>
                 <Input
                   id="project-name"
                   placeholder="my-awesome-project"
                   value={projectName}
                   onChange={(e) => setProjectName(e.target.value)}
+                  className="bg-gray-800/50 border-gray-600/50 text-white placeholder:text-gray-500 focus:border-cyan-500/50"
                 />
               </div>
 
-              <div className="p-4 shadow-[0_0_0_1px_#E93F3F,0_8px_20px_rgba(233,63,63,0.15)] rounded-lg border">
-                <h3 className="font-medium mb-2">Selected Template Features</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div className="p-6 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/30 rounded-xl">
+                <h3 className="font-medium mb-4 text-cyan-400">Selected Template Features</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {templates
                     .find((t) => t.id === selectedTemplate)
                     ?.features.map((feature) => (
-                      <div key={feature} className="flex items-center gap-2">
-                        <Zap size={14} className="text-[#E93F3F]" />
-                        <span className="text-sm">{feature}</span>
+                      <div key={feature} className="flex items-center gap-3">
+                        <div className="w-6 h-6 bg-cyan-500/20 rounded-md flex items-center justify-center">
+                          <Zap size={14} className="text-cyan-400" />
+                        </div>
+                        <span className="text-sm text-gray-300">{feature}</span>
                       </div>
                     ))}
                 </div>
               </div>
             </div>
 
-            <div className="flex justify-between gap-3 mt-4 pt-4 border-t">
-              <Button variant="outline" onClick={handleBack}>
+            <div className="flex justify-between gap-3 mt-6 pt-4 border-t border-gray-700/50">
+              <Button 
+                variant="outline" 
+                onClick={handleBack}
+                className="bg-gray-800/50 border-gray-600/50 text-gray-300 hover:bg-gray-700/50 hover:text-white"
+              >
                 Back
               </Button>
               <Button
-                className="bg-[#E93F3F] hover:bg-[#d03636] text-white"
+                className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white border-none shadow-lg"
                 onClick={handleCreateProject}
               >
                 Create Project
