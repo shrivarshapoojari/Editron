@@ -511,7 +511,7 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
                                                 <ReactMarkdown
                                                     remarkPlugins={[remarkGfm, remarkMath]}
                                                     rehypePlugins={[rehypeKatex]}
-                                                    components={{
+                                                    components={{ //@ts-ignore
                                                         code: ({ children, className, inline }) => {
                                                             if (inline) {
                                                                 return (
