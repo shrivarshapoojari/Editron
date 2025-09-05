@@ -22,43 +22,20 @@ export function Header() {
                   Editron
                 </span>
               </Link>
+          
               
-              {/* Desktop Navigation Links */}
-              <div className="hidden md:flex items-center gap-8">
-                <Link
-                  href="/docs"
-                  className="text-gray-300 hover:text-cyan-400 transition-colors duration-300 font-medium"
-                >
-                  Docs
-                </Link>
-                <Link
-                  href="/features"
-                  className="text-gray-300 hover:text-cyan-400 transition-colors duration-300 font-medium"
-                >
-                  Features
-                </Link>
-                <Link
-                  href="/api"
-                  className="text-gray-300 hover:text-cyan-400 transition-colors duration-300 font-medium flex items-center gap-2"
-                >
-                  API
-                  <span className="text-cyan-400 border border-cyan-400/50 bg-cyan-400/10 rounded-lg px-2 py-1 text-xs font-semibold">
-                    New
-                  </span>
-                </Link>
-              </div>
             </div>
 
             {/* Right side items */}
             <div className="flex items-center gap-4">
               <div className="hidden md:flex items-center gap-4">
-                <ThemeToggle />
+               
                 <UserButton />
               </div>
 
               {/* Mobile Navigation */}
               <div className="flex md:hidden items-center gap-3">
-                <ThemeToggle />
+               
                 <UserButton />
               </div>
             </div>
