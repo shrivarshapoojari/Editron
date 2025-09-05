@@ -132,30 +132,30 @@ export function TemplateFileTree({
   };
 
   return (
-    <Sidebar className="bg-gradient-to-b from-gray-950 to-black border-r border-gray-800/50">
+    <Sidebar className="bg-gradient-to-b from-gray-950 to-gray-900 border-r border-cyan-500/20 shadow-lg">
       <SidebarContent className="bg-transparent">
         <SidebarGroup>
-          <SidebarGroupLabel className="text-gray-300 font-semibold">{title}</SidebarGroupLabel>
+          <SidebarGroupLabel className="font-semibold text-sm bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">{title}</SidebarGroupLabel>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <SidebarGroupAction className="text-gray-400 hover:text-cyan-400 hover:bg-gray-800/50">
+              <SidebarGroupAction className="text-cyan-400 hover:text-cyan-300 hover:bg-cyan-500/10 transition-all rounded-lg border border-transparent hover:border-cyan-500/30">
                 <Plus className="h-4 w-4" />
               </SidebarGroupAction>
             </DropdownMenuTrigger>
             <DropdownMenuContent 
               align="end"
-              className="bg-gray-900/95 backdrop-blur-xl border-gray-700/50 shadow-2xl"
+              className="bg-gray-900/95 backdrop-blur-xl border-cyan-500/30 shadow-2xl shadow-cyan-500/10"
             >
               <DropdownMenuItem 
                 onClick={handleAddRootFile}
-                className="text-gray-300 hover:text-white"
+                className="text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/10 focus:bg-cyan-500/10 focus:text-cyan-300"
               >
                 <FilePlus className="h-4 w-4 mr-2" />
                 New File
               </DropdownMenuItem>
               <DropdownMenuItem 
                 onClick={handleAddRootFolder}
-                className="text-gray-300 hover:text-white"
+                className="text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/10 focus:bg-cyan-500/10 focus:text-cyan-300"
               >
                 <FolderPlus className="h-4 w-4 mr-2" />
                 New Folder
@@ -200,7 +200,7 @@ export function TemplateFileTree({
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarRail className="bg-gray-800/30" />
+      <SidebarRail className="bg-cyan-500/10 border-l border-cyan-500/20" />
 
       <NewFileDialog
         isOpen={isNewFileDialogOpen}
@@ -299,8 +299,8 @@ function TemplateNode({
             onClick={() => onFileSelect?.(file)}
             className={`flex-1 transition-colors duration-200 ${
               isSelected 
-                ? "bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 text-cyan-400" 
-                : "text-gray-400 hover:text-white hover:bg-gray-800/50"
+                ? "bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 text-cyan-400 shadow-lg shadow-cyan-500/10" 
+                : "text-gray-400 hover:text-cyan-300 hover:bg-cyan-500/5 border border-transparent hover:border-cyan-500/20"
             }`}
           >
             <File className="h-4 w-4 mr-2 shrink-0" />
@@ -312,26 +312,26 @@ function TemplateNode({
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity text-gray-400 hover:text-white hover:bg-gray-800/50"
+                className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity text-gray-400 hover:text-cyan-400 hover:bg-cyan-500/10"
               >
                 <MoreHorizontal className="h-3 w-3" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent 
               align="end"
-              className="bg-gray-900/95 backdrop-blur-xl border-gray-700/50 shadow-2xl"
+              className="bg-gray-900/95 backdrop-blur-xl border-cyan-500/30 shadow-2xl shadow-cyan-500/10"
             >
               <DropdownMenuItem 
                 onClick={handleRename}
-                className="text-gray-300 hover:text-white"
+                className="text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/10 focus:bg-cyan-500/10 focus:text-cyan-300"
               >
                 <Edit3 className="h-4 w-4 mr-2" />
                 Rename
               </DropdownMenuItem>
-              <DropdownMenuSeparator className="bg-gray-700/50" />
+              <DropdownMenuSeparator className="bg-cyan-500/20" />
               <DropdownMenuItem
                 onClick={handleDelete}
-                className="text-red-400 hover:text-red-300"
+                className="text-red-400 hover:text-red-300 hover:bg-red-500/10 focus:bg-red-500/10"
               >
                 <Trash2 className="h-4 w-4 mr-2" />
                 Delete
@@ -423,9 +423,9 @@ function TemplateNode({
         >
           <div className="flex items-center group">
             <CollapsibleTrigger asChild>
-              <SidebarMenuButton className="flex-1 text-gray-300 hover:text-white hover:bg-gray-800/50">
+              <SidebarMenuButton className="flex-1 text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/5 border border-transparent hover:border-cyan-500/20 transition-all">
                 <ChevronRight className="transition-transform text-gray-500" />
-                <Folder className="h-4 w-4 mr-2 shrink-0 text-blue-400" />
+                <Folder className="h-4 w-4 mr-2 shrink-0 text-cyan-400" />
                 <span>{folderName}</span>
               </SidebarMenuButton>
             </CollapsibleTrigger>
@@ -435,41 +435,41 @@ function TemplateNode({
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity text-gray-400 hover:text-white hover:bg-gray-800/50"
+                  className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity text-gray-400 hover:text-cyan-400 hover:bg-cyan-500/10"
                 >
                   <MoreHorizontal className="h-3 w-3" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent 
                 align="end"
-                className="bg-gray-900/95 backdrop-blur-xl border-gray-700/50 shadow-2xl"
+                className="bg-gray-900/95 backdrop-blur-xl border-cyan-500/30 shadow-2xl shadow-cyan-500/10"
               >
                 <DropdownMenuItem 
                   onClick={handleAddFile}
-                  className="text-gray-300 hover:text-white"
+                  className="text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/10 focus:bg-cyan-500/10 focus:text-cyan-300"
                 >
                   <FilePlus className="h-4 w-4 mr-2" />
                   New File
                 </DropdownMenuItem>
                 <DropdownMenuItem 
                   onClick={handleAddFolder}
-                  className="text-gray-300 hover:text-white"
+                  className="text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/10 focus:bg-cyan-500/10 focus:text-cyan-300"
                 >
                   <FolderPlus className="h-4 w-4 mr-2" />
                   New Folder
                 </DropdownMenuItem>
-                <DropdownMenuSeparator className="bg-gray-700/50" />
+                <DropdownMenuSeparator className="bg-cyan-500/20" />
                 <DropdownMenuItem 
                   onClick={handleRename}
-                  className="text-gray-300 hover:text-white"
+                  className="text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/10 focus:bg-cyan-500/10 focus:text-cyan-300"
                 >
                   <Edit3 className="h-4 w-4 mr-2" />
                   Rename
                 </DropdownMenuItem>
-                <DropdownMenuSeparator className="bg-gray-700/50" />
+                <DropdownMenuSeparator className="bg-cyan-500/20" />
                 <DropdownMenuItem
                   onClick={handleDelete}
-                  className="text-red-400 hover:text-red-300"
+                  className="text-red-400 hover:text-red-300 hover:bg-red-500/10 focus:bg-red-500/10"
                 >
                   <Trash2 className="h-4 w-4 mr-2" />
                   Delete
