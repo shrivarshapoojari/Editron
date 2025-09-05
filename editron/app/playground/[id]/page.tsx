@@ -321,7 +321,7 @@ const MainPlaygroundPage = () => {
       <div className="flex flex-col items-center justify-center h-[calc(100vh-4rem)] p-4 bg-gradient-to-br from-gray-950 to-black">
         <div className="w-full max-w-md p-8 rounded-2xl bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-xl border border-cyan-500/30 shadow-2xl shadow-cyan-500/10">
           <div className="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
-            <div className="w-8 h-8 bg-white rounded-md animate-pulse" />
+            <div className="w-8 h-8 bg-gradient-to-br from-cyan-200 to-blue-200 rounded-md animate-pulse" />
           </div>
           <h2 className="text-xl font-semibold mb-6 text-center bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
             Loading Playground
@@ -382,13 +382,13 @@ const MainPlaygroundPage = () => {
           onRenameFolder={wrappedHandleRenameFolder}
         />
         <SidebarInset>
-          <header className="flex h-16 shrink-0 items-center gap-2 border-b border-gray-800/50 bg-gradient-to-r from-gray-900/50 to-gray-800/50 backdrop-blur-xl px-4">
-            <SidebarTrigger className="-ml-1 text-gray-400 hover:text-white" />
-            <Separator orientation="vertical" className="mr-2 h-4 bg-gray-700" />
+          <header className="flex h-16 shrink-0 items-center gap-2 border-b border-cyan-500/20 bg-gradient-to-r from-gray-950/90 to-gray-900/90 backdrop-blur-xl px-4 shadow-lg shadow-cyan-500/5">
+            <SidebarTrigger className="-ml-1 text-cyan-400 hover:text-cyan-300 hover:bg-cyan-500/10 rounded-lg transition-all" />
+            <Separator orientation="vertical" className="mr-2 h-4 bg-cyan-500/30" />
 
             <div className="flex flex-1 items-center gap-2">
               <div className="flex flex-col flex-1">
-                <h1 className="text-sm font-medium text-white">
+                <h1 className="text-sm font-medium bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
                   {playgroundData?.title || "Code Playground"}
                 </h1>
                 <p className="text-xs text-gray-400">
@@ -410,12 +410,12 @@ const MainPlaygroundPage = () => {
                       variant="outline"
                       onClick={() => handleSave()}
                       disabled={!activeFile || !activeFile.hasUnsavedChanges}
-                      className="bg-gray-800/50 border-gray-600/50 text-gray-300 hover:bg-gray-700/50 hover:text-white disabled:opacity-50"
+                      className="bg-gray-800/50 border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 hover:text-cyan-300 hover:border-cyan-400/50 disabled:opacity-50 disabled:bg-gray-900/50 disabled:border-gray-600/30 disabled:text-gray-500 transition-all"
                     >
                       <Save className="h-4 w-4" />
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent className="bg-gray-900/95 border-gray-700/50 text-gray-300">Save (Ctrl+S)</TooltipContent>
+                  <TooltipContent className="bg-gray-900/95 border-cyan-500/30 text-cyan-300 shadow-lg backdrop-blur-sm">Save (Ctrl+S)</TooltipContent>
                 </Tooltip>
 
                 <Tooltip>
@@ -425,12 +425,12 @@ const MainPlaygroundPage = () => {
                       variant="outline"
                       onClick={handleSaveAll}
                       disabled={!hasUnsavedChanges}
-                      className="bg-gray-800/50 border-gray-600/50 text-gray-300 hover:bg-gray-700/50 hover:text-white disabled:opacity-50"
+                      className="bg-gray-800/50 border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 hover:text-cyan-300 hover:border-cyan-400/50 disabled:opacity-50 disabled:bg-gray-900/50 disabled:border-gray-600/30 disabled:text-gray-500 transition-all"
                     >
                       <Save className="h-4 w-4" /> All
                     </Button>
                   </TooltipTrigger>
-                  <TooltipContent className="bg-gray-900/95 border-gray-700/50 text-gray-300">Save All (Ctrl+Shift+S)</TooltipContent>
+                  <TooltipContent className="bg-gray-900/95 border-cyan-500/30 text-cyan-300 shadow-lg backdrop-blur-sm">Save All (Ctrl+Shift+S)</TooltipContent>
                 </Tooltip>
 
                <ToggleAI
@@ -444,25 +444,25 @@ const MainPlaygroundPage = () => {
                     <Button 
                       size="sm" 
                       variant="outline"
-                      className="bg-gray-800/50 border-gray-600/50 text-gray-300 hover:bg-gray-700/50 hover:text-white"
+                      className="bg-gray-800/50 border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 hover:text-cyan-300 hover:border-cyan-400/50 transition-all"
                     >
                       <Settings className="h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent 
                     align="end"
-                    className="bg-gray-900/95 backdrop-blur-xl border-gray-700/50 shadow-2xl"
+                    className="bg-gray-900/95 backdrop-blur-xl border-cyan-500/30 shadow-2xl shadow-cyan-500/10"
                   >
                     <DropdownMenuItem
                       onClick={() => setIsPreviewVisible(!isPreviewVisible)}
-                      className="text-gray-300 hover:text-white"
+                      className="text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/10 focus:bg-cyan-500/10 focus:text-cyan-300"
                     >
                       {isPreviewVisible ? "Hide" : "Show"} Preview
                     </DropdownMenuItem>
-                    <DropdownMenuSeparator className="bg-gray-700/50" />
+                    <DropdownMenuSeparator className="bg-cyan-500/20" />
                     <DropdownMenuItem 
                       onClick={closeAllFiles}
-                      className="text-gray-300 hover:text-white"
+                      className="text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/10 focus:bg-cyan-500/10 focus:text-cyan-300"
                     >
                       Close All Files
                     </DropdownMenuItem>
@@ -475,7 +475,7 @@ const MainPlaygroundPage = () => {
           <div className="h-[calc(100vh-4rem)]">
             {openFiles.length > 0 ? (
               <div className="h-full flex flex-col">
-                <div className="border-b border-gray-800/50 bg-gray-900/30">
+                <div className="border-b border-cyan-500/20 bg-gradient-to-r from-gray-950/50 to-gray-900/50 backdrop-blur-sm">
                   <Tabs
                     value={activeFileId || ""}
                     onValueChange={setActiveFileId}
@@ -486,7 +486,7 @@ const MainPlaygroundPage = () => {
                           <TabsTrigger
                             key={file.id}
                             value={file.id}
-                            className="relative h-8 px-3 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500/20 data-[state=active]:to-blue-500/20 data-[state=active]:border data-[state=active]:border-cyan-500/30 data-[state=active]:text-cyan-400 data-[state=active]:shadow-lg text-gray-400 hover:text-white rounded-lg group"
+                            className="relative h-8 px-3 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500/20 data-[state=active]:to-blue-500/20 data-[state=active]:border data-[state=active]:border-cyan-500/30 data-[state=active]:text-cyan-400 data-[state=active]:shadow-lg text-gray-400 hover:text-cyan-300 hover:bg-cyan-500/5 rounded-lg group transition-all"
                           >
                             <div className="flex items-center gap-2">
                               <FileText className="h-3 w-3" />

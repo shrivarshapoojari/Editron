@@ -247,11 +247,13 @@ const WebContainerPreview = ({
 
   if (isLoading) {
     return (
-      <div className="h-full flex items-center justify-center">
-        <div className="text-center space-y-4 max-w-md p-6 rounded-lg bg-gray-50 dark:bg-gray-900">
-          <Loader2 className="h-10 w-10 animate-spin text-primary mx-auto" />
-          <h3 className="text-lg font-medium">Initializing WebContainer</h3>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+      <div className="h-full flex items-center justify-center bg-gradient-to-br from-gray-950 to-black">
+        <div className="text-center space-y-6 max-w-md p-8 rounded-2xl bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-xl border border-cyan-500/30 shadow-2xl shadow-cyan-500/10">
+          <div className="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mx-auto">
+            <Loader2 className="h-8 w-8 animate-spin text-white" />
+          </div>
+          <h3 className="text-lg font-medium text-cyan-400">Initializing WebContainer</h3>
+          <p className="text-sm text-gray-400">
             Setting up the environment for your project...
           </p>
         </div>
@@ -261,24 +263,38 @@ const WebContainerPreview = ({
 
   if (error || setupError) {
     return (
-      <div className="h-full flex items-center justify-center">
-        <div className="bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 p-6 rounded-lg max-w-md">
-          <div className="flex items-center gap-2 mb-3">
-            <XCircle className="h-5 w-5" />
-            <h3 className="font-semibold">Error</h3>
+      <div className="h-full flex items-center justify-center bg-gradient-to-br from-gray-950 to-black">
+        <div className="max-w-md p-8 rounded-2xl bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-xl border border-red-500/30 shadow-2xl shadow-red-500/10">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-12 h-12 bg-gradient-to-br from-red-500/20 to-red-600/20 rounded-xl flex items-center justify-center">
+              <XCircle className="h-6 w-6 text-red-400" />
+            </div>
+            <h3 className="font-semibold text-red-400">Error</h3>
           </div>
-          <p className="text-sm">{error || setupError}</p>
+          <p className="text-sm text-gray-300">{error || setupError}</p>
         </div>
       </div>
     );
   }
   const getStepIcon = (stepIndex: number) => {
     if (stepIndex < currentStep) {
-      return <CheckCircle className="h-5 w-5 text-green-500" />;
+      return (
+        <div className="w-8 h-8 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-full flex items-center justify-center border border-green-500/50">
+          <CheckCircle className="h-5 w-5 text-green-400" />
+        </div>
+      );
     } else if (stepIndex === currentStep) {
-      return <Loader2 className="h-5 w-5 animate-spin text-blue-500" />;
+      return (
+        <div className="w-8 h-8 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-full flex items-center justify-center border border-cyan-500/50">
+          <Loader2 className="h-5 w-5 animate-spin text-cyan-400" />
+        </div>
+      );
     } else {
-      return <div className="h-5 w-5 rounded-full border-2 border-gray-300" />;
+      return (
+        <div className="w-8 h-8 bg-gray-800/50 rounded-full flex items-center justify-center border border-gray-600/50">
+          <div className="h-3 w-3 rounded-full bg-gray-600" />
+        </div>
+      );
     }
   };
 
@@ -288,11 +304,11 @@ const WebContainerPreview = ({
 
     return (
       <span
-        className={`text-sm font-medium ${
+        className={`text-sm font-medium transition-colors ${
           isComplete
-            ? "text-green-600"
+            ? "text-green-400"
             : isActive
-            ? "text-blue-600"
+            ? "text-cyan-400"
             : "text-gray-500"
         }`}
       >
@@ -302,29 +318,29 @@ const WebContainerPreview = ({
   };
 
   return (
-    <div className="h-full w-full flex flex-col">
+    <div className="h-full w-full flex flex-col bg-gradient-to-br from-gray-950 to-black">
       {!previewUrl ? (
         <div className="h-full flex flex-col">
-          <div className="w-full max-w-md p-6 m-5 rounded-lg bg-white dark:bg-zinc-800 shadow-sm mx-auto">
+          <div className="w-full max-w-md p-6 m-5 rounded-2xl bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-xl border border-gray-700/50 shadow-2xl mx-auto">
             <Progress
               value={(currentStep / totalSteps) * 100}
-              className="h-2 mb-6"
+              className="h-3 mb-6 bg-gray-800/50"
             />
 
             <div className="space-y-4 mb-6">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-4">
                 {getStepIcon(1)}
                 {getStepText(1, "Transforming template data")}
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-4">
                 {getStepIcon(2)}
                 {getStepText(2, "Mounting files")}
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-4">
                 {getStepIcon(3)}
                 {getStepText(3, "Installing dependencies")}
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-4">
                 {getStepIcon(4)}
                 {getStepText(4, "Starting development server")}
               </div>
@@ -333,31 +349,35 @@ const WebContainerPreview = ({
 
           {/* Terminal */}
           <div className="flex-1 p-4">
-            <TerminalComponent
-              ref={terminalRef}
-              webContainerInstance={instance}
-              theme="dark"
-              className="h-full"
-            />
+            <div className="h-full bg-gradient-to-r from-gray-900/50 to-gray-800/50 rounded-xl border border-gray-700/50 overflow-hidden">
+              <TerminalComponent
+                ref={terminalRef}
+                webContainerInstance={instance}
+                theme="dark"
+                className="h-full"
+              />
+            </div>
           </div>
         </div>
       ) : (
         <div className="h-full flex flex-col">
-          <div className="flex-1">
+          <div className="flex-1 rounded-t-xl overflow-hidden border border-gray-700/50">
             <iframe
               src={previewUrl}
-              className="w-full h-full border-none"
+              className="w-full h-full border-none bg-gray-950"
               title="WebContainer Preview"
             />
           </div>
 
-          <div className="h-64 border-t">
-            <TerminalComponent
-              ref={terminalRef}
-              webContainerInstance={instance}
-              theme="dark"
-              className="h-full"
-            />
+          <div className="h-64 border-t border-gray-700/50">
+            <div className="h-full bg-gradient-to-r from-gray-900/50 to-gray-800/50 rounded-b-xl overflow-hidden">
+              <TerminalComponent
+                ref={terminalRef}
+                webContainerInstance={instance}
+                theme="dark"
+                className="h-full"
+              />
+            </div>
           </div>
         </div>
       )}

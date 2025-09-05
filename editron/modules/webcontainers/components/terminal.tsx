@@ -50,25 +50,25 @@ TerminalComponent = forwardRef<TerminalRef, TerminalProps>(({
 
   const terminalThemes = {
     dark: {
-      background: "#09090B",
-      foreground: "#FAFAFA",
-      cursor: "#FAFAFA",
-      cursorAccent: "#09090B",
-      selection: "#27272A",
-      black: "#18181B",
+      background: "#0F172A",
+      foreground: "#F1F5F9",
+      cursor: "#06B6D4",
+      cursorAccent: "#0F172A",
+      selection: "#0891B230",
+      black: "#1E293B",
       red: "#EF4444",
-      green: "#22C55E",
-      yellow: "#EAB308",
+      green: "#10B981",
+      yellow: "#F59E0B",
       blue: "#3B82F6",
-      magenta: "#A855F7",
+      magenta: "#8B5CF6",
       cyan: "#06B6D4",
-      white: "#F4F4F5",
-      brightBlack: "#3F3F46",
+      white: "#F8FAFC",
+      brightBlack: "#475569",
       brightRed: "#F87171",
-      brightGreen: "#4ADE80",
-      brightYellow: "#FDE047",
+      brightGreen: "#34D399",
+      brightYellow: "#FBBF24",
       brightBlue: "#60A5FA",
-      brightMagenta: "#C084FC",
+      brightMagenta: "#A78BFA",
       brightCyan: "#22D3EE",
       brightWhite: "#FFFFFF",
     },
@@ -421,20 +421,20 @@ TerminalComponent = forwardRef<TerminalRef, TerminalProps>(({
   }, [webContainerInstance, connectToWebContainer, isConnected]);
 
   return (
-    <div className={cn("flex flex-col h-full bg-background border rounded-lg overflow-hidden", className)}>
+    <div className={cn("flex flex-col h-full bg-gradient-to-br from-gray-950 to-gray-900 border border-cyan-500/20 rounded-lg overflow-hidden shadow-lg", className)}>
       {/* Terminal Header */}
-      <div className="flex items-center justify-between px-3 py-2 border-b bg-muted/50">
+      <div className="flex items-center justify-between px-3 py-2 border-b border-cyan-500/20 bg-gradient-to-r from-gray-900/80 to-gray-800/80 backdrop-blur-sm">
         <div className="flex items-center gap-2">
           <div className="flex gap-1">
-            <div className="w-3 h-3 rounded-full bg-red-500"></div>
-            <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-            <div className="w-3 h-3 rounded-full bg-green-500"></div>
+            <div className="w-3 h-3 rounded-full bg-red-500 shadow-sm"></div>
+            <div className="w-3 h-3 rounded-full bg-yellow-500 shadow-sm"></div>
+            <div className="w-3 h-3 rounded-full bg-green-500 shadow-sm"></div>
           </div>
-          <span className="text-sm font-medium">WebContainer Terminal</span>
+          <span className="text-sm font-medium text-cyan-400">WebContainer Terminal</span>
           {isConnected && (
             <div className="flex items-center gap-1">
-              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-              <span className="text-xs text-muted-foreground">Connected</span>
+              <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+              <span className="text-xs text-green-400">Connected</span>
             </div>
           )}
         </div>
@@ -449,7 +449,7 @@ TerminalComponent = forwardRef<TerminalRef, TerminalProps>(({
                   setSearchTerm(e.target.value);
                   searchInTerminal(e.target.value);
                 }}
-                className="h-6 w-32 text-xs"
+                className="h-6 w-32 text-xs bg-gray-800/50 border-cyan-500/30 text-cyan-300 placeholder:text-gray-500 focus:border-cyan-400/50"
               />
             </div>
           )}
@@ -458,7 +458,7 @@ TerminalComponent = forwardRef<TerminalRef, TerminalProps>(({
             variant="ghost"
             size="sm"
             onClick={() => setShowSearch(!showSearch)}
-            className="h-6 w-6 p-0"
+            className="h-6 w-6 p-0 text-gray-400 hover:text-cyan-400 hover:bg-cyan-500/10"
           >
             <Search className="h-3 w-3" />
           </Button>
@@ -467,7 +467,7 @@ TerminalComponent = forwardRef<TerminalRef, TerminalProps>(({
             variant="ghost"
             size="sm"
             onClick={copyTerminalContent}
-            className="h-6 w-6 p-0"
+            className="h-6 w-6 p-0 text-gray-400 hover:text-cyan-400 hover:bg-cyan-500/10"
           >
             <Copy className="h-3 w-3" />
           </Button>
@@ -476,7 +476,7 @@ TerminalComponent = forwardRef<TerminalRef, TerminalProps>(({
             variant="ghost"
             size="sm"
             onClick={downloadTerminalLog}
-            className="h-6 w-6 p-0"
+            className="h-6 w-6 p-0 text-gray-400 hover:text-cyan-400 hover:bg-cyan-500/10"
           >
             <Download className="h-3 w-3" />
           </Button>
@@ -485,7 +485,7 @@ TerminalComponent = forwardRef<TerminalRef, TerminalProps>(({
             variant="ghost"
             size="sm"
             onClick={clearTerminal}
-            className="h-6 w-6 p-0"
+            className="h-6 w-6 p-0 text-gray-400 hover:text-cyan-400 hover:bg-cyan-500/10"
           >
             <Trash2 className="h-3 w-3" />
           </Button>
