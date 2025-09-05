@@ -12,7 +12,7 @@ export default function ComingSoonPage() {
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-purple-400/20 to-pink-500/20 rounded-full blur-3xl animate-pulse" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-cyan-400/20 to-blue-500/20 rounded-full blur-3xl animate-pulse delay-1000" />
       
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 pt-16">
         {/* Back Button */}
         <div className="absolute top-8 left-8">
           <Link href="/dashboard">
@@ -26,7 +26,7 @@ export default function ComingSoonPage() {
           </Link>
         </div>
 
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto text-center pt-8">
           {/* Main Icon */}
           <div className="relative mb-8">
             <div className="w-32 h-32 bg-gradient-to-br from-purple-400 to-pink-500 rounded-3xl flex items-center justify-center mx-auto shadow-2xl shadow-purple-500/25 animate-pulse">
@@ -119,14 +119,7 @@ export default function ComingSoonPage() {
                 Explore Other Features
               </Button>
             </Link>
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="border-purple-500/30 text-purple-400 hover:text-white hover:border-purple-400/50 hover:bg-purple-500/10 px-8 py-6 text-lg font-semibold bg-transparent backdrop-blur-sm transition-all duration-300"
-            >
-              <Star className="w-5 h-5 mr-2" />
-              Notify Me
-            </Button>
+            
           </div>
 
           {/* Footer Message */}
