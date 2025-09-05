@@ -312,7 +312,7 @@ TerminalComponent = forwardRef<TerminalRef, TerminalProps>(({
     }, 100);
 
     // Welcome message
-    terminal.writeln("🚀 WebContainer Terminal");
+    terminal.writeln("Terminal");
     terminal.writeln("Type 'help' for available commands");
     writePrompt();
 
@@ -324,12 +324,12 @@ TerminalComponent = forwardRef<TerminalRef, TerminalProps>(({
 
     try {
       setIsConnected(true);
-      term.current.writeln("✅ Connected to WebContainer");
+      term.current.writeln(" Connected to WebContainer");
       term.current.writeln("Ready to execute commands");
       writePrompt();
     } catch (error) {
       setIsConnected(false);
-      term.current.writeln("❌ Failed to connect to WebContainer");
+      term.current.writeln(" Failed to connect to WebContainer");
       console.error("WebContainer connection error:", error);
     }
   }, [webContainerInstance, writePrompt]);
@@ -337,7 +337,7 @@ TerminalComponent = forwardRef<TerminalRef, TerminalProps>(({
   const clearTerminal = useCallback(() => {
     if (term.current) {
       term.current.clear();
-      term.current.writeln("🚀 WebContainer Terminal");
+      term.current.writeln(" Terminal");
       writePrompt();
     }
   }, [writePrompt]);
@@ -430,7 +430,7 @@ TerminalComponent = forwardRef<TerminalRef, TerminalProps>(({
             <div className="w-3 h-3 rounded-full bg-yellow-500 shadow-sm"></div>
             <div className="w-3 h-3 rounded-full bg-green-500 shadow-sm"></div>
           </div>
-          <span className="text-sm font-medium text-cyan-400">WebContainer Terminal</span>
+          <span className="text-sm font-medium text-cyan-400">Terminal</span>
           {isConnected && (
             <div className="flex items-center gap-1">
               <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>

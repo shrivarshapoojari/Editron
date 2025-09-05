@@ -475,7 +475,7 @@ const MainPlaygroundPage = () => {
           <div className="h-[calc(100vh-4rem)]">
             {openFiles.length > 0 ? (
               <div className="h-full flex flex-col">
-                <div className="border-b border-cyan-500/20 bg-gradient-to-r from-gray-950/50 to-gray-900/50 backdrop-blur-sm">
+                <div className="border-b border-cyan-500/20 bg-gradient-to-r from-gray-900 to-gray-800">
                   <Tabs
                     value={activeFileId || ""}
                     onValueChange={setActiveFileId}
@@ -486,7 +486,7 @@ const MainPlaygroundPage = () => {
                           <TabsTrigger
                             key={file.id}
                             value={file.id}
-                            className="relative h-8 px-3 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500/20 data-[state=active]:to-blue-500/20 data-[state=active]:border data-[state=active]:border-cyan-500/30 data-[state=active]:text-cyan-400 data-[state=active]:shadow-lg text-gray-400 hover:text-cyan-300 hover:bg-cyan-500/5 rounded-lg group transition-all"
+                            className="relative h-8 px-3 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-600/30 data-[state=active]:to-blue-600/30 data-[state=active]:border data-[state=active]:border-cyan-500/50 data-[state=active]:text-cyan-300 data-[state=active]:shadow-lg text-gray-300 hover:text-cyan-400 hover:bg-cyan-500/10 rounded-lg group transition-all"
                           >
                             <div className="flex items-center gap-2">
                               <FileText className="h-3 w-3" />
