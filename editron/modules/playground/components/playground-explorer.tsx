@@ -100,6 +100,27 @@ export function TemplateFileTree({
   const [isNewFolderDialogOpen, setIsNewFolderDialogOpen] =
     React.useState(false);
 
+  // Add simple style overrides
+  React.useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      [data-sidebar="sidebar"] {
+        background: linear-gradient(to bottom, rgb(3 7 18), rgb(17 24 39)) !important;
+      }
+      [data-sidebar="content"],
+      [data-sidebar="group"],
+      [data-sidebar="menu"] {
+        background: transparent !important;
+      }
+    `;
+    document.head.appendChild(style);
+    return () => {
+      if (document.head.contains(style)) {
+        document.head.removeChild(style);
+      }
+    };
+  }, []);
+
   const handleAddRootFile = () => {
     setIsNewFileDialogOpen(true);
   };
@@ -132,10 +153,23 @@ export function TemplateFileTree({
   };
 
   return (
-    <Sidebar className="bg-gradient-to-b from-gray-950 to-gray-900 border-r border-cyan-500/20 shadow-lg">
+    <Sidebar 
+      className="bg-gradient-to-b from-gray-950 to-gray-900 border-r border-cyan-500/20 shadow-lg"
+      style={{ 
+        background: 'linear-gradient(to bottom, rgb(3 7 18), rgb(17 24 39))',
+        '--sidebar-background': 'transparent',
+        '--sidebar-foreground': 'hsl(210 40% 98%)',
+        '--sidebar-primary': 'hsl(210 40% 98%)',
+        '--sidebar-primary-foreground': 'hsl(222.2 84% 4.9%)',
+        '--sidebar-accent': 'hsl(210 40% 96%)',
+        '--sidebar-accent-foreground': 'hsl(222.2 47.4% 11.2%)',
+        '--sidebar-border': 'hsl(217.2 32.6% 17.5%)',
+        '--sidebar-ring': 'hsl(212 72% 59%)',
+      } as React.CSSProperties}
+    >
       <SidebarContent className="bg-transparent">
-        <SidebarGroup>
-          <SidebarGroupLabel className="font-semibold text-sm bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">{title}</SidebarGroupLabel>
+        <SidebarGroup className="bg-transparent">
+          <SidebarGroupLabel className="font-semibold text-sm bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent px-2 py-1">{title}</SidebarGroupLabel>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <SidebarGroupAction className="text-cyan-400 hover:text-cyan-300 hover:bg-cyan-500/10 transition-all rounded-lg border border-transparent hover:border-cyan-500/30">
@@ -162,8 +196,8 @@ export function TemplateFileTree({
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <SidebarGroupContent>
-            <SidebarMenu>
+          <SidebarGroupContent className="bg-transparent">
+            <SidebarMenu className="bg-transparent space-y-1">
               {isRootFolder ? (
                 (data as TemplateFolder).items.map((child, index) => (
                   <TemplateNode
@@ -292,15 +326,15 @@ function TemplateNode({
     };
 
     return (
-      <SidebarMenuItem>
-        <div className="flex items-center group">
+      <SidebarMenuItem className="bg-transparent">
+        <div className="flex items-center group bg-transparent">
           <SidebarMenuButton
             isActive={isSelected}
             onClick={() => onFileSelect?.(file)}
-            className={`flex-1 transition-colors duration-200 ${
+            className={`flex-1 transition-colors duration-200 bg-transparent border-0 ${
               isSelected 
-                ? "bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 text-cyan-400 shadow-lg shadow-cyan-500/10" 
-                : "text-gray-400 hover:text-cyan-300 hover:bg-cyan-500/5 border border-transparent hover:border-cyan-500/20"
+                ? "bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 text-cyan-400 shadow-lg shadow-cyan-500/10 rounded-lg" 
+                : "text-gray-400 hover:text-cyan-300 hover:bg-cyan-500/5 border border-transparent hover:border-cyan-500/20 rounded-lg"
             }`}
           >
             <File className="h-4 w-4 mr-2 shrink-0" />
@@ -415,15 +449,15 @@ function TemplateNode({
     };
 
     return (
-      <SidebarMenuItem>
+      <SidebarMenuItem className="bg-transparent">
         <Collapsible
           open={isOpen}
           onOpenChange={setIsOpen}
-          className="group/collapsible [&[data-state=open]>div>button>svg:first-child]:rotate-90"
+          className="group/collapsible [&[data-state=open]>div>button>svg:first-child]:rotate-90 bg-transparent"
         >
-          <div className="flex items-center group">
+          <div className="flex items-center group bg-transparent">
             <CollapsibleTrigger asChild>
-              <SidebarMenuButton className="flex-1 text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/5 border border-transparent hover:border-cyan-500/20 transition-all">
+              <SidebarMenuButton className="flex-1 text-gray-300 hover:text-cyan-300 hover:bg-cyan-500/5 border border-transparent hover:border-cyan-500/20 transition-all rounded-lg bg-transparent">
                 <ChevronRight className="transition-transform text-gray-500" />
                 <Folder className="h-4 w-4 mr-2 shrink-0 text-cyan-400" />
                 <span>{folderName}</span>
@@ -478,8 +512,8 @@ function TemplateNode({
             </DropdownMenu>
           </div>
 
-          <CollapsibleContent>
-            <SidebarMenuSub>
+          <CollapsibleContent className="bg-transparent">
+            <SidebarMenuSub className="bg-transparent ml-4 space-y-1">
               {folder.items.map((childItem, index) => (
                 <TemplateNode
                   key={index}
