@@ -30,14 +30,14 @@ export default async function DashboardLayout({
 
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen w-full overflow-x-hidden bg-gradient-to-br from-gray-950 via-gray-900 to-black">
+      <div className="flex h-screen w-full overflow-hidden bg-gradient-to-br from-gray-950 via-gray-900 to-black">
         {/* Dashboard Sidebar */}
         {/* @ts-ignore */}
         <DashboardSidebar initialPlaygroundData={formattedPlaygroundData}/>
-        <main className="flex-1 relative">
+        <main className="flex-1 relative overflow-hidden">
           {/* Background effects for main content */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f2937_1px,transparent_1px),linear-gradient(to_bottom,#1f2937_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-30" />
-          <div className="relative z-10">
+          <div className="relative z-10 h-full overflow-y-auto">
             {children}
           </div>
         </main>

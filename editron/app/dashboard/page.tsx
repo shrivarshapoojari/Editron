@@ -11,7 +11,7 @@ const Page = async () => {
   console.log("Playgrounds:", playgrounds);
   
   return (
-    <div className="relative z-10 flex flex-col justify-start items-center min-h-screen mx-auto max-w-7xl px-4 py-10">
+    <div className="relative z-10 flex flex-col justify-start items-center h-full mx-auto max-w-7xl px-4 py-10">
       {/* Header Section */}
       <div className="w-full mb-12">
         <div className="flex items-center gap-3 mb-4">

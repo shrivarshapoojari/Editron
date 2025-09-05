@@ -109,7 +109,7 @@ const WebContainerPreview = ({
         // Write to terminal
         if (terminalRef.current?.writeToTerminal) {
           terminalRef.current.writeToTerminal(
-            "🔄 Transforming template data...\r\n"
+            "�️ Setting up your workspace...\r\n"
           );
         }
 
@@ -126,14 +126,14 @@ const WebContainerPreview = ({
 
         if (terminalRef.current?.writeToTerminal) {
           terminalRef.current.writeToTerminal(
-            "📁 Mounting files to WebContainer...\r\n"
+            "� Preparing your files...\r\n"
           );
         }
         await instance.mount(files);
 
         if (terminalRef.current?.writeToTerminal) {
           terminalRef.current.writeToTerminal(
-            "✅ Files mounted successfully\r\n"
+            "Files are ready to use!\r\n"
           );
         }
         setLoadingState((prev) => ({
@@ -147,7 +147,7 @@ const WebContainerPreview = ({
 
         if (terminalRef.current?.writeToTerminal) {
           terminalRef.current.writeToTerminal(
-            "📦 Installing dependencies...\r\n"
+            "⚡ Getting everything ready...\r\n"
           );
         }
 
@@ -173,7 +173,7 @@ const WebContainerPreview = ({
 
         if (terminalRef.current?.writeToTerminal) {
           terminalRef.current.writeToTerminal(
-            "✅ Dependencies installed successfully\r\n"
+            "✅ Everything is set up perfectly!\r\n"
           );
         }
 
@@ -188,7 +188,7 @@ const WebContainerPreview = ({
 
         if (terminalRef.current?.writeToTerminal) {
           terminalRef.current.writeToTerminal(
-            "🚀 Starting development server...\r\n"
+            "🚀 Launching your app...\r\n"
           );
         }
 
@@ -197,7 +197,7 @@ const WebContainerPreview = ({
         instance.on("server-ready", (port: number, url: string) => {
           if (terminalRef.current?.writeToTerminal) {
             terminalRef.current.writeToTerminal(
-              `🌐 Server ready at ${url}\r\n`
+              `🌐 Your app is live and ready! Visit: ${url}\r\n`
             );
           }
           setPreviewUrl(url);
@@ -330,19 +330,19 @@ const WebContainerPreview = ({
             <div className="space-y-4 mb-6">
               <div className="flex items-center gap-4">
                 {getStepIcon(1)}
-                {getStepText(1, "Transforming template data")}
+                {getStepText(1, "Setting up your workspace")}
               </div>
               <div className="flex items-center gap-4">
                 {getStepIcon(2)}
-                {getStepText(2, "Mounting files")}
+                {getStepText(2, "Preparing your files")}
               </div>
               <div className="flex items-center gap-4">
                 {getStepIcon(3)}
-                {getStepText(3, "Installing dependencies")}
+                {getStepText(3, "Getting everything ready")}
               </div>
               <div className="flex items-center gap-4">
                 {getStepIcon(4)}
-                {getStepText(4, "Starting development server")}
+                {getStepText(4, "Launching your app")}
               </div>
             </div>
           </div>
