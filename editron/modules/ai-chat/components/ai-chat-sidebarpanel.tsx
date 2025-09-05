@@ -272,23 +272,18 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
 
     return (
         <TooltipProvider>
-            <>
-                {/* Backdrop */}
-                <div
-                    className={cn(
-                        "fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-300",
-                        isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-                    )}
-                    onClick={onClose}
-                />
+            {isOpen && (
+                <>
+                    {/* Backdrop */}
+                    <div
+                        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-300 opacity-100"
+                        onClick={onClose}
+                    />
 
-                {/* Side Panel */}
-                <div
-                    className={cn(
-                        "fixed right-0 top-0 h-full w-full max-w-6xl bg-zinc-950 border-l border-zinc-800 z-50 flex flex-col transition-transform duration-300 ease-out shadow-2xl",
-                        isOpen ? "translate-x-0" : "translate-x-full"
-                    )}
-                >
+                    {/* Side Panel */}
+                    <div
+                        className="fixed right-0 top-0 h-full w-full max-w-2xl bg-zinc-950 border-l border-zinc-800 z-50 flex flex-col transition-transform duration-300 ease-out shadow-2xl translate-x-0"
+                    >
                     {/* Enhanced Header */}
                     <div className="shrink-0 border-b border-zinc-800 bg-zinc-900/80 backdrop-blur-sm">
                         <div className="flex items-center justify-between p-6">
@@ -645,7 +640,8 @@ export const AIChatSidePanel: React.FC<AIChatSidePanelProps> = ({
                         </div>
                     </form>
                 </div>
-            </>
+                </>
+            )}
         </TooltipProvider>
     );
 };
