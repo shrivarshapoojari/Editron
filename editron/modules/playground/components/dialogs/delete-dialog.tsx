@@ -34,19 +34,23 @@ export function DeleteDialog({
 }: DeleteDialogProps) {
   return (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
-      <AlertDialogContent>
+      <AlertDialogContent className="bg-gradient-to-b from-gray-950 to-gray-900 border-red-500/30 text-gray-100 shadow-2xl shadow-red-500/10">
         <AlertDialogHeader>
-          <AlertDialogTitle>{title}</AlertDialogTitle>
-          <AlertDialogDescription>
+          <AlertDialogTitle className="text-xl font-semibold text-red-400">
+            {title}
+          </AlertDialogTitle>
+          <AlertDialogDescription className="text-gray-400">
             {description.replace("{item}", `"${itemName}"`)}
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>{cancelLabel}</AlertDialogCancel>
+        <AlertDialogFooter className="gap-2">
+          <AlertDialogCancel className="bg-gray-800/50 border-gray-600/50 text-gray-300 hover:bg-gray-700/50 hover:text-gray-100 hover:border-gray-500/50 transition-all">
+            {cancelLabel}
+          </AlertDialogCancel>
           <AlertDialogAction
             onClick={onConfirm}
             className={cn(
-              "bg-destructive text-destructive-foreground hover:bg-destructive/90"
+              "bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white border-0 transition-all shadow-lg shadow-red-500/20"
             )}
           >
             {confirmLabel}
