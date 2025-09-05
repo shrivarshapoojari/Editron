@@ -318,8 +318,8 @@ const MainPlaygroundPage = () => {
   // Loading state
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center h-[calc(100vh-4rem)] p-4 bg-gradient-to-br from-gray-950 to-black">
-        <div className="w-full max-w-md p-8 rounded-2xl bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-xl border border-cyan-500/30 shadow-2xl shadow-cyan-500/10">
+      <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-gray-950 to-black">
+        <div className="w-full max-w-md p-8 rounded-2xl bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-xl border border-cyan-500/30 shadow-2xl shadow-cyan-500/10 mx-4">
           <div className="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
             <div className="w-8 h-8 bg-gradient-to-br from-cyan-200 to-blue-200 rounded-md animate-pulse" />
           </div>
